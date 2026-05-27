@@ -1,16 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { AdminLogin } from "@/components/admin/AdminLogin";
-import { isAuthed } from "@/lib/auth";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin")({
-  component: AdminLoginPage,
+  component: AdminLayout,
 });
 
-function AdminLoginPage() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isAuthed()) navigate({ to: "/admin/dashboard" });
-  }, [navigate]);
-  return <AdminLogin />;
+function AdminLayout() {
+  return <Outlet />;
 }
