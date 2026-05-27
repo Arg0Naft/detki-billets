@@ -59,6 +59,20 @@ export function Hero({ config }: { config: EventConfig }) {
             Узнать больше
           </Button>
         </div>
+
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-[#64748B]">
+          <span>Записи и дополнительные материалы позже появятся на платформах:</span>
+          <Button variant="ghost" size="sm" asChild>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="text-[#FF0000]">
+              YouTube
+            </a>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
+            <a href="https://max.com" target="_blank" rel="noreferrer" className="text-[#7C3AED]">
+              Max
+            </a>
+          </Button>
+        </div>
       </div>
     </section>
   );
