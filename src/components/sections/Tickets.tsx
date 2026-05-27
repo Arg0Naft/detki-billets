@@ -41,25 +41,19 @@ export function Tickets({
           </div>
         )}
 
-        <div className="mt-12 grid gap-6 md:grid-cols-1">
+        <div className="mt-12 flex justify-center">
           {visibleTickets.map((t) => {
             const features = parseFeatures(t.features);
-            const popular = true; // единственный тариф делаем «главным»
 
             return (
               <div
                 key={t.$id}
-                className={`relative flex flex-col rounded-2xl bg-white p-7 shadow-sm transition ${
-                  popular
-                    ? "border-2 border-[#0EA5E9] shadow-lg shadow-[#0EA5E9]/15 md:-translate-y-2"
-                    : "border border-slate-200"
-                }`}
+                className="relative flex w-full max-w-md flex-col rounded-2xl border-2 border-[#0EA5E9] bg-white p-8 shadow-lg shadow-[#0EA5E9]/15"
               >
-                {popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow">
-                    Рекомендованный тариф
-                  </span>
-                )}
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow">
+                  Рекомендованный тариф
+                </span>
+
                 <h3 className="mt-2 text-xl font-semibold text-[#1E293B]">{t.name}</h3>
                 {t.description && (
                   <p className="mt-2 text-sm text-[#64748B]">{t.description}</p>
@@ -78,7 +72,7 @@ export function Tickets({
 
                 <ul className="mt-6 flex-1 space-y-3">
                   {features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[#1E293B]">
+                    >
                       <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#0EA5E9]" />
                       <span>{f}</span>
                     </li>
@@ -87,9 +81,7 @@ export function Tickets({
 
                 <Button
                   disabled={!salesEnabled}
-                  onClick={() =>
-                    alert("Оплата будет доступна в ближайшее время")
-                  }
+                  onClick={() => alert("Оплата будет доступна в ближайшее время")}
                   className="mt-7 w-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] text-white hover:opacity-90"
                 >
                   {salesEnabled ? "Купить билет" : "Скоро в продаже"}
