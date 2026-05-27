@@ -25,11 +25,11 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-white text-[#1E293B]">
-      <Header title={config.title} />
+            <Header title={config.title} />
       <main>
         <Hero config={config} />
-        <About config={config} />
         <Speakers speakers={speakers} />
+        <About config={config} />
         <Tickets tickets={tickets} salesEnabled={config.sales_enabled} />
         <Faq items={faq} />
       </main>
