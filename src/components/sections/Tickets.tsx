@@ -7,7 +7,10 @@ function parseFeatures(s: string): string[] {
     const arr = JSON.parse(s);
     return Array.isArray(arr) ? arr.map(String) : [];
   } catch {
-    return s.split("\n").map((x) => x.trim()).filter(Boolean);
+    return s
+      .split("\n")
+      .map((x) => x.trim())
+      .filter(Boolean);
   }
 }
 
@@ -18,15 +21,17 @@ export function Tickets({
   tickets: Ticket[];
   salesEnabled: boolean;
 }) {
+  const visibleTickets = tickets.slice(0, 1);
+
   return (
     <section id="tickets" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
-            Билеты
+            Билет на конференцию
           </h2>
           <p className="mt-4 text-base text-[#64748B] md:text-lg">
-            Выберите удобный для вас формат участия
+            Один понятный тариф — всё, что нужно для комфортного участия
           </p>
         </div>
 
@@ -36,10 +41,11 @@ export function Tickets({
           </div>
         )}
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {tickets.map((t) => {
+        <div className="mt-12 grid gap-6 md:grid-cols-1">
+          {visibleTickets.map((t) => {
             const features = parseFeatures(t.features);
-            const popular = t.is_popular;
+            const popular = true; // единственный тариф делаем «главным»
+
             return (
               <div
                 key={t.$id}
@@ -51,10 +57,10 @@ export function Tickets({
               >
                 {popular && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow">
-                    Популярный
+                    Рекомендованный тариф
                   </span>
                 )}
-                <h3 className="text-xl font-semibold text-[#1E293B]">{t.name}</h3>
+                <h3 className="mt-2 text-xl font-semibold text-[#1E293B]">{t.name}</h3>
                 {t.description && (
                   <p className="mt-2 text-sm text-[#64748B]">{t.description}</p>
                 )}
@@ -84,11 +90,7 @@ export function Tickets({
                   onClick={() =>
                     alert("Оплата будет доступна в ближайшее время")
                   }
-                  className={`mt-7 w-full ${
-                    popular
-                      ? "bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] text-white hover:opacity-90"
-                      : "bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
-                  }`}
+                  className="mt-7 w-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] text-white hover:opacity-90"
                 >
                   {salesEnabled ? "Купить билет" : "Скоро в продаже"}
                 </Button>
