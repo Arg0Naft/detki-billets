@@ -72,7 +72,7 @@ export function Tickets({
 
                 <ul className="mt-6 flex-1 space-y-3">
                   {features.map((f, i) => (
-                    >
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#1E293B]">
                       <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#0EA5E9]" />
                       <span>{f}</span>
                     </li>
