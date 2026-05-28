@@ -153,8 +153,15 @@ function warn(scope: string, err: unknown) {
 // ---------- Event config ----------
 export async function getEventConfig(): Promise<EventConfig> {
   try {
-    const doc = await databases.getDocument(DATABASE_ID, COL.config, "main");
-    return doc as unknown as EventConfig;
+    const res = await databases.listDocuments(DATABASE_ID, COL.config, [
+      Query.limit(1),
+    ]);
+
+    if (!res.documents.length) {
+      throw new Error("No event_config document found");
+    }
+
+    return res.documents[0] as unknown as EventConfig;
   } catch (err) {
     warn("getEventConfig", err);
     return placeholderConfig;
@@ -162,30 +169,38 @@ export async function getEventConfig(): Promise<EventConfig> {
 }
 
 export async function updateEventConfig(data: Partial<EventConfig>): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { $id, ...payload } = data as EventConfig & { $id?: string };
-  await databases.updateDocument(DATABASE_ID, COL.config, "main", payload);
-}
+  const res = await databases.listDocuments(DATABASE_ID, COL.config, [
+    Query.limit(1),
+  ]);
 
-// ---------- Tickets ----------
-export async function getTickets(): Promise<Ticket[]> {
-  try {
-    const res = await databases.listDocuments(DATABASE_ID, COL.tickets, [
-      Query.orderAsc("sort_order"),
-    ]);
-    return res.documents as unknown as Ticket[];
-  } catch (err) {
-    warn("getTickets", err);
-    return placeholderTickets;
+  if (res.documents.length) {
+    const doc = res.documents[0] as EventConfig & {
+      $id: string;
+      $createdAt?: string;
+      $updatedAt?: string;
+      $permissions?: string[];
+      $databaseId?: string;
+      $collectionId?: string;
+    };
+
+    const {
+      $id,
+      $createdAt,
+      $updatedAt,
+      $permissions,
+      $databaseId,
+      $collectionId,
+      ...rest
+    } = doc;
+
+    await databases.updateDocument(DATABASE_ID, COL.config, $id, {
+      ...rest,
+      ...data,
+    });
+  } else {
+    await databases.createDocument(DATABASE_ID, COL.config, ID.unique(), data);
   }
 }
-
-export async function updateTicket(id: string, data: Partial<Ticket>): Promise<void> {
-  const { $id: _id, ...payload } = data as Ticket & { $id?: string };
-  void _id;
-  await databases.updateDocument(DATABASE_ID, COL.tickets, id, payload);
-}
-
 // ---------- Speakers ----------
 export async function getSpeakers(): Promise<Speaker[]> {
   try {
