@@ -19,7 +19,8 @@ const databases = new Databases(client);
 const placeholderConfig: EventConfig = {
   $id: "main",
   title: "Конференция для молодых мам",
-  subtitle: "Знания, поддержка и вдохновение для тех, кто только начал свой путь в материнстве",
+  subtitle:
+    "Знания, поддержка и вдохновение для тех, кто только начал свой путь в материнстве",
   date: "15 сентября 2026",
   time: "10:00 – 18:00",
   location: "Москва, Конгресс-центр «Здоровье»",
@@ -168,7 +169,9 @@ export async function getEventConfig(): Promise<EventConfig> {
   }
 }
 
-export async function updateEventConfig(data: Partial<EventConfig>): Promise<void> {
+export async function updateEventConfig(
+  data: Partial<EventConfig>,
+): Promise<void> {
   const res = await databases.listDocuments(DATABASE_ID, COL.config, [
     Query.limit(1),
   ]);
@@ -201,6 +204,29 @@ export async function updateEventConfig(data: Partial<EventConfig>): Promise<voi
     await databases.createDocument(DATABASE_ID, COL.config, ID.unique(), data);
   }
 }
+
+// ---------- Tickets ----------
+export async function getTickets(): Promise<Ticket[]> {
+  try {
+    const res = await databases.listDocuments(DATABASE_ID, COL.tickets, [
+      Query.orderAsc("sort_order"),
+    ]);
+    return res.documents as unknown as Ticket[];
+  } catch (err) {
+    warn("getTickets", err);
+    return placeholderTickets;
+  }
+}
+
+export async function updateTicket(
+  id: string,
+  data: Partial<Ticket>,
+): Promise<void> {
+  const { $id: _id, ...payload } = data as Ticket & { $id?: string };
+  void _id;
+  await databases.updateDocument(DATABASE_ID, COL.tickets, id, payload);
+}
+
 // ---------- Speakers ----------
 export async function getSpeakers(): Promise<Speaker[]> {
   try {
@@ -214,11 +240,16 @@ export async function getSpeakers(): Promise<Speaker[]> {
   }
 }
 
-export async function createSpeaker(data: Omit<Speaker, "$id">): Promise<void> {
+export async function createSpeaker(
+  data: Omit<Speaker, "$id">,
+): Promise<void> {
   await databases.createDocument(DATABASE_ID, COL.speakers, ID.unique(), data);
 }
 
-export async function updateSpeaker(id: string, data: Partial<Speaker>): Promise<void> {
+export async function updateSpeaker(
+  id: string,
+  data: Partial<Speaker>,
+): Promise<void> {
   const { $id: _id, ...payload } = data as Speaker & { $id?: string };
   void _id;
   await databases.updateDocument(DATABASE_ID, COL.speakers, id, payload);
@@ -241,11 +272,16 @@ export async function getFaq(): Promise<FaqItem[]> {
   }
 }
 
-export async function createFaqItem(data: Omit<FaqItem, "$id">): Promise<void> {
+export async function createFaqItem(
+  data: Omit<FaqItem, "$id">,
+): Promise<void> {
   await databases.createDocument(DATABASE_ID, COL.faq, ID.unique(), data);
 }
 
-export async function updateFaqItem(id: string, data: Partial<FaqItem>): Promise<void> {
+export async function updateFaqItem(
+  id: string,
+  data: Partial<FaqItem>,
+): Promise<void> {
   const { $id: _id, ...payload } = data as FaqItem & { $id?: string };
   void _id;
   await databases.updateDocument(DATABASE_ID, COL.faq, id, payload);
