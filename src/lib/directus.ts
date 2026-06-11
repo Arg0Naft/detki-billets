@@ -12,9 +12,9 @@ const DIRECTUS_URL = import.meta.env.VITE_DIRECTUS_URL?.replace(/\/+$/, "");
 
 const demoSiteSettings: SiteSettings = {
   $id: "site-settings-demo",
-  site_name: "Detki Billets",
+  site_name: "Детки Билеты",
   footer_description:
-    "A practical event page with a working demo data source while Directus content is unavailable.",
+    "Демо-версия сайта конференции с резервными данными на случай, если Directus временно недоступен.",
   contact_email: "hello@detki-billets.test",
   contact_phone: "+7 (495) 123-45-67",
   instagram_url: "https://instagram.com",
@@ -26,31 +26,31 @@ const demoSiteSettings: SiteSettings = {
 
 const demoEventConfig: EventConfig = {
   $id: "event-config-demo",
-  title: "Conference for Young Parents",
-  subtitle: "Talks, support, and practical guidance for families with children.",
-  date: "15 September 2026",
+  title: "Конференция для молодых родителей",
+  subtitle: "Выступления, поддержка и практические советы для семей с детьми.",
+  date: "15 сентября 2026",
   time: "10:00 - 18:00",
-  location: "Moscow",
-  location_address: "33 Profsoyuznaya St, Moscow",
+  location: "Москва",
+  location_address: "ул. Профсоюзная, 33, Москва",
   description_1:
-    "A one-day conference with pediatricians, psychologists, and educators focused on everyday family wellbeing.",
+    "Однодневная конференция с педиатрами, психологами и экспертами по развитию детей о здоровье и благополучии семьи.",
   description_2:
-    "Participants can ask questions, meet speakers in person, and leave with practical next steps.",
+    "Участники смогут задать вопросы, пообщаться со спикерами лично и забрать с собой практические рекомендации.",
   sales_enabled: true,
 };
 
 const demoTickets: Ticket[] = [
   {
     $id: "ticket-standard",
-    name: "Standard",
+    name: "Стандарт",
     price: 2900,
     old_price: 3900,
-    description: "Full access to talks and materials.",
+    description: "Полный доступ ко всем выступлениям и материалам.",
     features: JSON.stringify([
-      "All conference talks",
-      "Coffee breaks and lunch",
-      "Handout materials",
-      "30-day replay access",
+      "Все выступления конференции",
+      "Кофе-брейки и обед",
+      "Раздаточные материалы",
+      "Доступ к записи на 30 дней",
     ]),
     payment_url: "https://example.com/pay/standard",
     is_popular: false,
@@ -61,13 +61,13 @@ const demoTickets: Ticket[] = [
     name: "VIP",
     price: 5900,
     old_price: 7900,
-    description: "Front-row seats and a private speaker meetup.",
+    description: "Места в первых рядах и закрытая встреча со спикерами.",
     features: JSON.stringify([
-      "Everything in Standard",
-      "Front-row seating",
-      "Private speaker meetup",
-      "Gift set",
-      "Unlimited replay access",
+      "Все, что входит в Стандарт",
+      "Места в первых рядах",
+      "Закрытая встреча со спикерами",
+      "Подарочный набор",
+      "Бессрочный доступ к записи",
     ]),
     payment_url: "https://example.com/pay/vip",
     is_popular: true,
@@ -79,16 +79,16 @@ const demoSpeakers: Speaker[] = [
   {
     $id: "speaker-1",
     name: "Anna Sokolova",
-    title: "Pediatrician",
-    bio: "Works with early childhood health and preventive care.",
+    title: "Педиатр",
+    bio: "Специализируется на раннем детском здоровье и профилактической медицине.",
     photo_url: "",
     sort_order: 1,
   },
   {
     $id: "speaker-2",
     name: "Maria Grigorieva",
-    title: "Perinatal Psychologist",
-    bio: "Helps parents navigate anxiety and attachment in early family life.",
+    title: "Перинатальный психолог",
+    bio: "Помогает родителям справляться с тревогой и выстраивать контакт в первые годы жизни ребёнка.",
     photo_url: "",
     sort_order: 2,
   },
@@ -98,17 +98,17 @@ const demoProgram: ProgramItem[] = [
   {
     $id: "program-1",
     time_slot: "10:00",
-    title: "Welcome and opening keynote",
-    speaker: "Organizing team",
-    description: "A short introduction to the day, themes, and practical takeaways.",
+    title: "Открытие конференции",
+    speaker: "Команда организаторов",
+    description: "Краткое приветствие, обзор тем дня и главных практических выводов.",
     sort_order: 1,
   },
   {
     $id: "program-2",
     time_slot: "11:00",
-    title: "Child health basics",
+    title: "Основы детского здоровья",
     speaker: "Anna Sokolova",
-    description: "What parents should watch for in the first years of life.",
+    description: "На что родителям стоит обращать внимание в первые годы жизни ребёнка.",
     sort_order: 2,
   },
 ];
@@ -116,14 +116,14 @@ const demoProgram: ProgramItem[] = [
 const demoFaq: FaqItem[] = [
   {
     $id: "faq-1",
-    question: "Can I attend with a child?",
-    answer: "Yes. A family-friendly area and feeding room are available on site.",
+    question: "Можно ли прийти с ребёнком?",
+    answer: "Да. На площадке будет семейная зона и комната для кормления.",
     sort_order: 1,
   },
   {
     $id: "faq-2",
-    question: "Will recordings be available?",
-    answer: "Yes. Recordings are shared after the event.",
+    question: "Будет ли доступна запись?",
+    answer: "Да. После конференции участники получат доступ к записям выступлений.",
     sort_order: 2,
   },
 ];
@@ -131,13 +131,13 @@ const demoFaq: FaqItem[] = [
 const demoLegalPages: LegalPage[] = [
   {
     $id: "legal-privacy",
-    title: "Privacy Policy",
+    title: "Политика конфиденциальности",
     url: "#",
     sort_order: 1,
   },
   {
     $id: "legal-offer",
-    title: "Public Offer",
+    title: "Публичная оферта",
     url: "#",
     sort_order: 2,
   },
