@@ -15,12 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import {
-  createSpeaker,
-  deleteSpeaker,
-  getSpeakers,
-  updateSpeaker,
-} from "@/lib/appwrite";
+import { createSpeaker, deleteSpeaker, getSpeakers, updateSpeaker } from "@/lib/directus";
 import type { Speaker } from "@/types";
 import { Trash2 } from "lucide-react";
 
