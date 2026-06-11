@@ -31,8 +31,9 @@ export interface Ticket {
   old_price: number;
   description: string;
   features: string; // JSON array string
-  payment_url: string;
+  payment_url?: string;
   is_popular: boolean;
+  is_active?: boolean;
   sort_order: number;
 }
 
@@ -42,6 +43,7 @@ export interface Speaker {
   title: string;
   bio: string;
   photo_url: string;
+  is_active?: boolean;
   sort_order: number;
 }
 
@@ -49,6 +51,7 @@ export interface FaqItem {
   $id: string;
   question: string;
   answer: string;
+  is_active?: boolean;
   sort_order: number;
 }
 
@@ -58,6 +61,7 @@ export interface ProgramItem {
   title: string;
   speaker: string;
   description: string;
+  is_active?: boolean;
   sort_order: number;
 }
 
@@ -65,5 +69,6 @@ export interface LegalPage {
   $id: string;
   title: string;
   url: string;
+  is_active?: boolean;
   sort_order: number;
 }
