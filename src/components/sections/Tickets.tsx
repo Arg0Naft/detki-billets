@@ -19,15 +19,15 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
     <section id="tickets" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">Tickets</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">Билеты</h2>
           <p className="mt-4 text-base text-[#64748B] md:text-lg">
-            Choose the attendance option that fits you best.
+            Выберите формат участия, который подходит вам больше всего.
           </p>
         </div>
 
         {!salesEnabled && (
           <div className="mx-auto mt-8 max-w-lg rounded-xl bg-[#FCE7F3] px-6 py-4 text-center text-sm font-medium text-[#9D174D]">
-            Ticket sales will open soon.
+            Скоро в продаже.
           </div>
         )}
 
@@ -42,7 +42,7 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
               >
                 {ticket.is_popular && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow">
-                    Recommended
+                    Рекомендованный тариф
                   </span>
                 )}
 
@@ -77,11 +77,9 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
                   className="mt-7 w-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] text-white hover:opacity-90"
                 >
                   {salesEnabled && ticket.payment_url ? (
-                    <a href={ticket.payment_url} target="_blank" rel="noreferrer">
-                      Buy ticket
-                    </a>
+                    <a href={ticket.payment_url}>Купить билет</a>
                   ) : (
-                    <span>{salesEnabled ? "Payment URL missing" : "Coming soon"}</span>
+                    <span>{salesEnabled ? "Ссылка оплаты не указана" : "Скоро в продаже"}</span>
                   )}
                 </Button>
               </div>
