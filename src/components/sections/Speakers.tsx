@@ -10,25 +10,23 @@ function initials(name: string) {
 }
 
 export function Speakers({ speakers }: { speakers: Speaker[] }) {
-  const visibleSpeakers = speakers.slice(0, 1);
-
   return (
     <section id="speakers" className="bg-[#F8FAFC] py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
-            Спикер
+            РЎРїРёРєРµСЂС‹
           </h2>
           <p className="mt-4 text-base text-[#64748B] md:text-lg">
-            Главный эксперт конференции
+            Р­РєСЃРїРµСЂС‚С‹ РєРѕРЅС„РµСЂРµРЅС†РёРё
           </p>
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-1 lg:grid-cols-1">
-          {visibleSpeakers.map((s) => (
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {speakers.map((s) => (
             <div
               key={s.$id}
-              className="mx-auto flex max-w-md flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition hover:shadow-md"
+              className="mx-auto flex h-full w-full max-w-md flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition hover:shadow-md"
             >
               {s.photo_url ? (
                 <img
