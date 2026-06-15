@@ -23,9 +23,7 @@ export function Footer({
         </div>
 
         <div>
-          <div className="text-sm font-semibold uppercase tracking-wider text-white">
-            РљРѕРЅС‚Р°РєС‚С‹
-          </div>
+          <div className="text-sm font-semibold uppercase tracking-wider text-white">Контакты</div>
           <ul className="mt-4 space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-[#0EA5E9]" />
@@ -45,7 +43,7 @@ export function Footer({
 
         <div>
           <div className="text-sm font-semibold uppercase tracking-wider text-white">
-            РњС‹ РІ СЃРѕС†СЃРµС‚СЏС…
+            Мы в соцсетях
           </div>
           <div className="mt-4 flex gap-3">
             <a
@@ -96,8 +94,7 @@ export function Footer({
       </div>
       <div className="border-t border-white/5">
         <div className="mx-auto max-w-6xl px-4 py-5 text-xs text-slate-500 md:px-6">
-          В© {new Date().getFullYear()} {settings.site_name || config.title}. Р’СЃРµ РїСЂР°РІР°
-          Р·Р°С‰РёС‰РµРЅС‹.
+          © {new Date().getFullYear()} {settings.site_name || config.title}. Все права защищены.
         </div>
       </div>
     </footer>

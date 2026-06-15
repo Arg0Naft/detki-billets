@@ -14,12 +14,8 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
     <section id="speakers" className="bg-[#F8FAFC] py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
-            РЎРїРёРєРµСЂС‹
-          </h2>
-          <p className="mt-4 text-base text-[#64748B] md:text-lg">
-            Р­РєСЃРїРµСЂС‚С‹ РєРѕРЅС„РµСЂРµРЅС†РёРё
-          </p>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">Спикеры</h2>
+          <p className="mt-4 text-base text-[#64748B] md:text-lg">Эксперты конференции</p>
         </div>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

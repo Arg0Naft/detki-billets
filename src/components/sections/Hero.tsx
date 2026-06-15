@@ -17,7 +17,7 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
 
       <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6">
         <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#0EA5E9] shadow-sm ring-1 ring-[#0EA5E9]/20">
-          РћРґРЅРѕРґРЅРµРІРЅР°СЏ РєРѕРЅС„РµСЂРµРЅС†РёСЏ
+          Однодневная конференция
         </span>
 
         <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[#1E293B] md:text-6xl">
@@ -48,7 +48,7 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
             onClick={() => scrollTo("#tickets")}
             className="w-full bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/30 hover:bg-[#0284C7] sm:w-auto"
           >
-            РљСѓРїРёС‚СЊ Р±РёР»РµС‚
+            Купить билет
           </Button>
           <Button
             size="lg"
@@ -56,15 +56,12 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
             onClick={() => scrollTo("#about")}
             className="w-full border-[#0EA5E9]/30 bg-white text-[#0EA5E9] hover:bg-[#0EA5E9]/5 sm:w-auto"
           >
-            РЈР·РЅР°С‚СЊ Р±РѕР»СЊС€Рµ
+            Узнать больше
           </Button>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-[#64748B]">
-          <span>
-            Р—Р°РїРёСЃРё Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РјР°С‚РµСЂРёР°Р»С‹ РїРѕР·Р¶Рµ
-            РїРѕСЏРІСЏС‚СЃСЏ РЅР° РїР»Р°С‚С„РѕСЂРјР°С…:
-          </span>
+          <span>Записи и дополнительные материалы позже появятся на платформах:</span>
           <Button variant="ghost" size="sm" asChild>
             <a
               href={settings.youtube_url || "https://youtube.com"}
