@@ -15,12 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import {
-  createFaqItem,
-  deleteFaqItem,
-  getFaq,
-  updateFaqItem,
-} from "@/lib/appwrite";
+import { createFaqItem, deleteFaqItem, getFaq, updateFaqItem } from "@/lib/directus";
 import type { FaqItem } from "@/types";
 import { Trash2 } from "lucide-react";
 
@@ -116,7 +111,10 @@ export function AdminFaq() {
           <div key={f.$id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
             <div>
               <Label className="mb-1.5 block">Вопрос</Label>
-              <Input value={f.question} onChange={(e) => patch(f.$id, { question: e.target.value })} />
+              <Input
+                value={f.question}
+                onChange={(e) => patch(f.$id, { question: e.target.value })}
+              />
             </div>
             <div>
               <Label className="mb-1.5 block">Ответ</Label>
@@ -149,9 +147,7 @@ export function AdminFaq() {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Удалить вопрос?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Это действие нельзя отменить.
-                    </AlertDialogDescription>
+                    <AlertDialogDescription>Это действие нельзя отменить.</AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Отмена</AlertDialogCancel>

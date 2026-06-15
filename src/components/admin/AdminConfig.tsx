@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { getEventConfig, updateEventConfig } from "@/lib/appwrite";
+import { getEventConfig, updateEventConfig } from "@/lib/directus";
 import type { EventConfig } from "@/types";
 
 export function AdminConfig() {
@@ -18,8 +18,7 @@ export function AdminConfig() {
 
   if (!c) return <div className="text-sm text-[#64748B]">Загрузка…</div>;
 
-  const update = <K extends keyof EventConfig>(k: K, v: EventConfig[K]) =>
-    setC({ ...c, [k]: v });
+  const update = <K extends keyof EventConfig>(k: K, v: EventConfig[K]) => setC({ ...c, [k]: v });
 
   async function save() {
     if (!c) return;
@@ -83,10 +82,7 @@ export function AdminConfig() {
           <div className="font-medium text-[#1E293B]">Продажи билетов</div>
           <div className="text-sm text-[#64748B]">Включить кнопки покупки на сайте</div>
         </div>
-        <Switch
-          checked={c.sales_enabled}
-          onCheckedChange={(v) => update("sales_enabled", v)}
-        />
+        <Switch checked={c.sales_enabled} onCheckedChange={(v) => update("sales_enabled", v)} />
       </div>
 
       <Button

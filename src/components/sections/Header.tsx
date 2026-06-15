@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "#about", label: "О событии" },
-  { href: "#speakers", label: "Спикеры" },
-  { href: "#tickets", label: "Билеты" },
+  { href: "#about", label: "Рћ СЃРѕР±С‹С‚РёРё" },
+  { href: "#speakers", label: "РЎРїРёРєРµСЂС‹" },
+  { href: "#program", label: "РџСЂРѕРіСЂР°РјРјР°" },
+  { href: "#tickets", label: "Р‘РёР»РµС‚С‹" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -49,7 +50,7 @@ export function Header({ title }: { title: string }) {
           className="text-left text-base font-semibold text-[#1E293B] md:text-lg"
         >
           <span className="bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
-            {title || "Конференция"}
+            {title || "РљРѕРЅС„РµСЂРµРЅС†РёСЏ"}
           </span>
         </button>
 
@@ -70,14 +71,14 @@ export function Header({ title }: { title: string }) {
             onClick={() => scrollTo("#tickets")}
             className="hidden bg-[#0EA5E9] text-white hover:bg-[#0284C7] md:inline-flex"
           >
-            Купить билет
+            РљСѓРїРёС‚СЊ Р±РёР»РµС‚
           </Button>
-          <button
-            className="md:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Меню"
-          >
-            {open ? <X className="h-6 w-6 text-[#1E293B]" /> : <Menu className="h-6 w-6 text-[#1E293B]" />}
+          <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="РњРµРЅСЋ">
+            {open ? (
+              <X className="h-6 w-6 text-[#1E293B]" />
+            ) : (
+              <Menu className="h-6 w-6 text-[#1E293B]" />
+            )}
           </button>
         </div>
       </div>
@@ -104,7 +105,7 @@ export function Header({ title }: { title: string }) {
               }}
               className="mt-2 bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
             >
-              Купить билет
+              РљСѓРїРёС‚СЊ Р±РёР»РµС‚
             </Button>
           </div>
         </div>

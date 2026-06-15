@@ -4,6 +4,7 @@ import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Speakers } from "@/components/sections/Speakers";
+import { Program } from "@/components/sections/Program";
 import { Tickets } from "@/components/sections/Tickets";
 import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
@@ -13,9 +14,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { config, tickets, speakers, faq, loading } = useEventData();
+  const { settings, config, tickets, speakers, program, faq, legalPages, loading } = useEventData();
 
-  if (loading || !config) {
+  if (loading || !settings || !config) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#0EA5E9]/20 border-t-[#0EA5E9]" />
@@ -25,15 +26,16 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-white text-[#1E293B]">
-            <Header title={config.title} />
+      <Header title={settings.site_name || config.title} />
       <main>
-        <Hero config={config} />
+        <Hero config={config} settings={settings} />
         <Speakers speakers={speakers} />
         <About config={config} />
+        <Program items={program} />
         <Tickets tickets={tickets} salesEnabled={config.sales_enabled} />
         <Faq items={faq} />
       </main>
-      <Footer config={config} />
+      <Footer config={config} settings={settings} legalPages={legalPages} />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin } from "lucide-react";
-import type { EventConfig } from "@/types";
+import type { EventConfig, SiteSettings } from "@/types";
 
 function scrollTo(id: string) {
   document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export function Hero({ config }: { config: EventConfig }) {
+export function Hero({ config, settings }: { config: EventConfig; settings: SiteSettings }) {
   return (
     <section
       id="top"
@@ -17,7 +17,7 @@ export function Hero({ config }: { config: EventConfig }) {
 
       <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6">
         <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#0EA5E9] shadow-sm ring-1 ring-[#0EA5E9]/20">
-          Однодневная конференция
+          РћРґРЅРѕРґРЅРµРІРЅР°СЏ РєРѕРЅС„РµСЂРµРЅС†РёСЏ
         </span>
 
         <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[#1E293B] md:text-6xl">
@@ -48,7 +48,7 @@ export function Hero({ config }: { config: EventConfig }) {
             onClick={() => scrollTo("#tickets")}
             className="w-full bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/30 hover:bg-[#0284C7] sm:w-auto"
           >
-            Купить билет
+            РљСѓРїРёС‚СЊ Р±РёР»РµС‚
           </Button>
           <Button
             size="lg"
@@ -56,19 +56,32 @@ export function Hero({ config }: { config: EventConfig }) {
             onClick={() => scrollTo("#about")}
             className="w-full border-[#0EA5E9]/30 bg-white text-[#0EA5E9] hover:bg-[#0EA5E9]/5 sm:w-auto"
           >
-            Узнать больше
+            РЈР·РЅР°С‚СЊ Р±РѕР»СЊС€Рµ
           </Button>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-[#64748B]">
-          <span>Записи и дополнительные материалы позже появятся на платформах:</span>
+          <span>
+            Р—Р°РїРёСЃРё Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РјР°С‚РµСЂРёР°Р»С‹ РїРѕР·Р¶Рµ
+            РїРѕСЏРІСЏС‚СЃСЏ РЅР° РїР»Р°С‚С„РѕСЂРјР°С…:
+          </span>
           <Button variant="ghost" size="sm" asChild>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="text-[#FF0000]">
+            <a
+              href={settings.youtube_url || "https://youtube.com"}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#FF0000]"
+            >
               YouTube
             </a>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <a href="https://max.com" target="_blank" rel="noreferrer" className="text-[#7C3AED]">
+            <a
+              href={settings.max_url || "https://max.com"}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#7C3AED]"
+            >
               Max
             </a>
           </Button>
