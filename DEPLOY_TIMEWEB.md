@@ -44,7 +44,8 @@
 ## 5. Nginx
 
 - Установить Nginx на VPS.
-- Для публичного сайта использовать `deploy/nginx/site.conf.example` как шаблон.
+- Запустить Node-приложение на `127.0.0.1:3000`.
+- Для публичного сайта использовать `deploy/nginx/site.conf.example` как шаблон reverse proxy к Node-приложению.
 - Для Directus admin/API использовать `deploy/nginx/admin.conf.example` как шаблон.
 - Подставить реальные домены:
   - например `example.com` для фронтенда
@@ -62,13 +63,17 @@
   - Directus admin и API доступны по HTTPS
   - `DIRECTUS_PUBLIC_URL` совпадает с реальным HTTPS-адресом
 
-## 7. Frontend build
+## 7. Сборка и запуск приложения
 
-- На машине сборки или на сервере выполнить:
-  - `npm install` или используемый в проекте менеджер пакетов
-  - `npm run build`
-- Разместить содержимое `dist/client` в директории, на которую смотрит Nginx.
-- Если используется SSR/серверная часть, заранее определить отдельный процесс запуска и reverse proxy.
+- На сервере выполнить `npm install`.
+- Указать `VITE_DIRECTUS_URL` перед production-сборкой.
+- Выполнить `npm run build`.
+- Убедиться, что создан runnable entry `dist/server/index.mjs`.
+- Запустить приложение командой `npm run start`. По умолчанию Nitro слушает порт `3000`; другой порт можно задать через переменную `PORT`.
+- Для постоянной работы запускать `npm run start` через systemd или PM2 с автоматическим перезапуском после сбоя и старта VPS:
+  - systemd: создать unit с `WorkingDirectory=/var/www/detki-billets`, `Environment=PORT=3000` и `ExecStart=/usr/bin/npm run start`
+  - PM2: выполнить `PORT=3000 pm2 start npm --name detki-billets -- run start`, затем `pm2 save` и `pm2 startup`
+- Не публиковать `dist/client` как отдельный статический сайт: HTML формирует SSR-сервер, а Nginx проксирует запросы к Node-приложению.
 
 ## 8. Проверка после деплоя
 
