@@ -9,8 +9,12 @@ export function Program({ items }: { items: ProgramItem[] }) {
     <section id="program" className="bg-[#F8FAFC] py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">Программа</h2>
-          <p className="mt-4 text-base text-[#64748B] md:text-lg">Расписание конференции на весь день.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
+            Программа
+          </h2>
+          <p className="mt-4 text-base text-[#64748B] md:text-lg">
+            Расписание конференции на весь день.
+          </p>
         </div>
 
         <div className="mt-12 space-y-4">

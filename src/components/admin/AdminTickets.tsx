@@ -46,25 +46,25 @@ export function AdminTickets() {
         is_popular: t.is_popular,
         sort_order: Number(t.sort_order),
       });
-      toast.success(`Р‘РёР»РµС‚ В«${t.name}В» СЃРѕС…СЂР°РЅС‘РЅ`);
+      toast.success(`Билет «${t.name}» сохранён`);
     } catch (e) {
       console.error(e);
-      toast.error("РћС€РёР±РєР° СЃРѕС…СЂР°РЅРµРЅРёСЏ");
+      toast.error("Ошибка сохранения");
     }
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-semibold text-[#1E293B]">Р‘РёР»РµС‚С‹</h2>
+      <h2 className="text-2xl font-semibold text-[#1E293B]">Билеты</h2>
       {tickets.map((t) => (
         <div key={t.$id} className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <Label className="mb-1.5 block">РќР°Р·РІР°РЅРёРµ</Label>
+              <Label className="mb-1.5 block">Название</Label>
               <Input value={t.name} onChange={(e) => patch(t.$id, { name: e.target.value })} />
             </div>
             <div>
-              <Label className="mb-1.5 block">РћРїРёСЃР°РЅРёРµ</Label>
+              <Label className="mb-1.5 block">Описание</Label>
               <Input
                 value={t.description}
                 onChange={(e) => patch(t.$id, { description: e.target.value })}
@@ -78,7 +78,7 @@ export function AdminTickets() {
               />
             </div>
             <div>
-              <Label className="mb-1.5 block">Р¦РµРЅР°, в‚Ѕ</Label>
+              <Label className="mb-1.5 block">Цена, ₽</Label>
               <Input
                 type="number"
                 value={t.price}
@@ -86,7 +86,7 @@ export function AdminTickets() {
               />
             </div>
             <div>
-              <Label className="mb-1.5 block">РЎС‚Р°СЂР°СЏ С†РµРЅР°, в‚Ѕ</Label>
+              <Label className="mb-1.5 block">Старая цена, ₽</Label>
               <Input
                 type="number"
                 value={t.old_price}
@@ -96,9 +96,7 @@ export function AdminTickets() {
           </div>
 
           <div>
-            <Label className="mb-1.5 block">
-              Р’РєР»СЋС‡РµРЅРѕ РІ Р±РёР»РµС‚ (РѕРґРЅР° СЃС‚СЂРѕРєР° вЂ” РѕРґРёРЅ РїСѓРЅРєС‚)
-            </Label>
+            <Label className="mb-1.5 block">Включено в билет (одна строка — один пункт)</Label>
             <Textarea
               rows={5}
               value={featuresToText(t.features)}
@@ -112,10 +110,10 @@ export function AdminTickets() {
                 checked={t.is_popular}
                 onCheckedChange={(v) => patch(t.$id, { is_popular: v })}
               />
-              <span className="text-sm text-[#1E293B]">РџРѕРїСѓР»СЏСЂРЅС‹Р№</span>
+              <span className="text-sm text-[#1E293B]">Популярный</span>
             </div>
             <div className="flex items-center gap-2">
-              <Label className="text-sm">РџРѕСЂСЏРґРѕРє</Label>
+              <Label className="text-sm">Порядок</Label>
               <Input
                 type="number"
                 className="w-24"
@@ -127,7 +125,7 @@ export function AdminTickets() {
               onClick={() => save(t)}
               className="ml-auto bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
             >
-              РЎРѕС…СЂР°РЅРёС‚СЊ
+              Сохранить
             </Button>
           </div>
         </div>

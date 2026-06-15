@@ -49,7 +49,9 @@ export function About({ config }: { config: EventConfig }) {
                 key={h.title}
                 className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
-                <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${h.bg}`}>
+                <div
+                  className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${h.bg}`}
+                >
                   <Icon className={`h-6 w-6 ${h.color}`} />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-[#1E293B]">{h.title}</h3>

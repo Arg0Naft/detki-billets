@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "#about", label: "Рћ СЃРѕР±С‹С‚РёРё" },
-  { href: "#speakers", label: "РЎРїРёРєРµСЂС‹" },
-  { href: "#program", label: "РџСЂРѕРіСЂР°РјРјР°" },
-  { href: "#tickets", label: "Р‘РёР»РµС‚С‹" },
+  { href: "#about", label: "О событии" },
+  { href: "#speakers", label: "Спикеры" },
+  { href: "#program", label: "Программа" },
+  { href: "#tickets", label: "Билеты" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -50,7 +50,7 @@ export function Header({ title }: { title: string }) {
           className="text-left text-base font-semibold text-[#1E293B] md:text-lg"
         >
           <span className="bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
-            {title || "РљРѕРЅС„РµСЂРµРЅС†РёСЏ"}
+            {title || "Конференция"}
           </span>
         </button>
 
@@ -71,9 +71,9 @@ export function Header({ title }: { title: string }) {
             onClick={() => scrollTo("#tickets")}
             className="hidden bg-[#0EA5E9] text-white hover:bg-[#0284C7] md:inline-flex"
           >
-            РљСѓРїРёС‚СЊ Р±РёР»РµС‚
+            Купить билет
           </Button>
-          <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="РњРµРЅСЋ">
+          <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="Меню">
             {open ? (
               <X className="h-6 w-6 text-[#1E293B]" />
             ) : (
@@ -105,7 +105,7 @@ export function Header({ title }: { title: string }) {
               }}
               className="mt-2 bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
             >
-              РљСѓРїРёС‚СЊ Р±РёР»РµС‚
+              Купить билет
             </Button>
           </div>
         </div>
