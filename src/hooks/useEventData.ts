@@ -9,9 +9,11 @@ import {
   getSpeakers,
   getTickets,
 } from "@/lib/directus";
+import { getEventHighlights } from "@/lib/event-highlights";
 import type {
   EventConfig,
   EventDescription,
+  EventHighlight,
   FaqItem,
   LegalPage,
   ProgramItem,
@@ -24,6 +26,7 @@ export function useEventData() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [config, setConfig] = useState<EventConfig | null>(null);
   const [descriptions, setDescriptions] = useState<EventDescription[] | null>(null);
+  const [highlights, setHighlights] = useState<EventHighlight[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
   const [program, setProgram] = useState<ProgramItem[]>([]);
@@ -37,6 +40,7 @@ export function useEventData() {
       getSiteSettings(),
       getEventConfig(),
       getEventDescriptions(),
+      getEventHighlights(),
       getTickets(),
       getSpeakers(),
       getProgram(),
@@ -48,6 +52,7 @@ export function useEventData() {
           siteSettings,
           eventConfig,
           eventDescriptions,
+          eventHighlights,
           siteTickets,
           siteSpeakers,
           siteProgram,
@@ -58,6 +63,7 @@ export function useEventData() {
           setSettings(siteSettings);
           setConfig(eventConfig);
           setDescriptions(eventDescriptions);
+          setHighlights(eventHighlights);
           setTickets(siteTickets);
           setSpeakers(siteSpeakers);
           setProgram(siteProgram);
@@ -71,5 +77,16 @@ export function useEventData() {
     };
   }, []);
 
-  return { settings, config, descriptions, tickets, speakers, program, faq, legalPages, loading };
+  return {
+    settings,
+    config,
+    descriptions,
+    highlights,
+    tickets,
+    speakers,
+    program,
+    faq,
+    legalPages,
+    loading,
+  };
 }
