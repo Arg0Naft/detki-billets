@@ -28,6 +28,7 @@ export interface EventConfig {
 
 export interface EventDescription {
   id: DirectusId;
+  title?: string;
   text: string;
   is_active?: boolean;
   sort_order: number;
