@@ -5,38 +5,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { EventConfig, EventDescription } from "@/types";
+import type { EventConfig, EventDescription, EventHighlight } from "@/types";
 
-const highlights = [
-  {
-    icon: BookOpen,
-    title: "Экспертные знания",
-    text: "Лекции от врачей, психологов и педагогов с многолетней практикой.",
-    color: "text-[#0EA5E9]",
-    bg: "bg-[#E0F2FE]",
-  },
-  {
-    icon: Heart,
-    title: "Живое общение",
-    text: "Тёплая атмосфера, поддержка и знакомства с такими же мамами.",
-    color: "text-[#EC4899]",
-    bg: "bg-[#FCE7F3]",
-  },
-  {
-    icon: Sparkles,
-    title: "Практические инструменты",
-    text: "Готовые методики, которые можно применять уже на следующий день.",
-    color: "text-[#0EA5E9]",
-    bg: "bg-[#E0F2FE]",
-  },
-];
+const iconMap = {
+  book: BookOpen,
+  heart: Heart,
+  sparkles: Sparkles,
+};
+
+const iconStyles = {
+  book: { color: "text-[#0EA5E9]", bg: "bg-[#E0F2FE]" },
+  heart: { color: "text-[#EC4899]", bg: "bg-[#FCE7F3]" },
+  sparkles: { color: "text-[#0EA5E9]", bg: "bg-[#E0F2FE]" },
+};
 
 export function About({
   config,
   descriptions,
+  highlights,
 }: {
   config: EventConfig;
   descriptions: EventDescription[] | null;
+  highlights: EventHighlight[];
 }) {
   const fallbackDescriptions: EventDescription[] = [
     {
@@ -81,25 +71,30 @@ export function About({
           </Accordion>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {highlights.map((h) => {
-            const Icon = h.icon;
-            return (
-              <div
-                key={h.title}
-                className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              >
+        {highlights.length > 0 && (
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {highlights.map((highlight) => {
+              const iconKey = highlight.icon in iconMap ? (highlight.icon as keyof typeof iconMap) : "sparkles";
+              const Icon = iconMap[iconKey];
+              const style = iconStyles[iconKey];
+
+              return (
                 <div
-                  className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${h.bg}`}
+                  key={highlight.id}
+                  className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
-                  <Icon className={`h-6 w-6 ${h.color}`} />
+                  <div
+                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${style.bg}`}
+                  >
+                    <Icon className={`h-6 w-6 ${style.color}`} />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-[#1E293B]">{highlight.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{highlight.text}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-[#1E293B]">{h.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{h.text}</p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
