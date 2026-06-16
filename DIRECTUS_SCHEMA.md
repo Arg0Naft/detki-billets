@@ -1,106 +1,134 @@
 # Directus Schema
 
-Документ описывает рекомендуемую структуру коллекций Directus для проекта `detki-billets`.
+Документ фиксирует data contract между Directus и frontend проекта `detki-billets`.
 
-## Общие замечания
+## Общие правила
 
-- Для всех контентных коллекций удобно использовать числовое или UUID `id`, которое Directus создаст автоматически.
-- Поле `sort_order` используется для ручной сортировки на сайте.
-- Поле `is_active` можно использовать для мягкого скрытия записей без удаления.
-- Для публичных коллекций стоит включить чтение только нужных полей.
+- Во всех коллекциях primary key называется `id`.
+- Тип primary key: UUID string, генерируемый Directus.
+- Поле `$id` не создаётся: это удалённое наследие Appwrite.
+- `site_settings` и `event_config` — логические singleton-коллекции: технически это обычные коллекции, но в каждой должна существовать ровно одна запись.
+- `sort_order` имеет тип integer и используется для ручной сортировки по возрастанию.
+- `is_active` имеет тип boolean, значение по умолчанию `true`.
+- Публичный frontend запрашивает только записи с `is_active = true`.
+- Публичной роли запрещены create, update и delete.
+- Русские display labels разрешены, технические имена коллекций и полей менять нельзя без миграции frontend.
 
 ## `site_settings`
 
 Одна запись с глобальными настройками сайта.
 
-Поля:
-
-- `site_name` — строка, название сайта
-- `footer_description` — текст, описание в футере
-- `contact_email` — строка, email для связи
-- `contact_phone` — строка, телефон для связи
-- `instagram_url` — строка, ссылка на Instagram
-- `telegram_url` — строка, ссылка на Telegram
-- `vk_url` — строка, ссылка на VK
-- `youtube_url` — строка, ссылка на YouTube
-- `max_url` — строка, ссылка на Max
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key, создаётся Directus |
+| `site_name` | string | да | Название сайта |
+| `footer_description` | text | да | Описание в футере |
+| `contact_email` | string | да | Email для связи |
+| `contact_phone` | string | да | Телефон для связи |
+| `instagram_url` | string | нет | Публичный URL |
+| `telegram_url` | string | нет | Публичный URL |
+| `vk_url` | string | нет | Публичный URL |
+| `youtube_url` | string | нет | Публичный URL |
+| `max_url` | string | нет | Публичный URL |
 
 ## `event_config`
 
 Одна запись с основными параметрами мероприятия.
 
-Поля:
-
-- `title` — строка, заголовок мероприятия
-- `subtitle` — текст, подзаголовок
-- `date` — строка, дата в удобном для фронтенда формате
-- `time` — строка, время проведения
-- `location` — строка, краткое место проведения
-- `location_address` — строка, полный адрес
-- `description_1` — длинный текст, первый абзац описания
-- `description_2` — длинный текст, второй абзац описания
-- `sales_enabled` — boolean, флаг включения продаж
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key, создаётся Directus |
+| `title` | string | да | Заголовок мероприятия |
+| `subtitle` | text | да | Подзаголовок |
+| `date` | string | да | Отображаемая дата |
+| `time` | string | да | Отображаемое время |
+| `location` | string | да | Город или краткое название площадки |
+| `location_address` | string | да | Полный адрес |
+| `description_1` | text | да | Первый абзац описания |
+| `description_2` | text | да | Второй абзац описания |
+| `sales_enabled` | boolean | да | По умолчанию `false` до подключения оплаты |
 
 ## `tickets`
 
 Тарифы билетов.
 
-Поля:
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `name` | string | да | Название тарифа |
+| `price` | integer | да | Цена в рублях без копеек |
+| `old_price` | integer | да | `0`, если старой цены нет |
+| `description` | text | да | Краткое описание |
+| `features` | JSON | да | Массив строк, например `["Пункт 1", "Пункт 2"]` |
+| `payment_url` | string | нет | Внешняя HTTPS-ссылка ЮKassa/оплаты |
+| `is_popular` | boolean | да | По умолчанию `false` |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
 
-- `name` — строка, название тарифа
-- `price` — decimal/integer, текущая цена
-- `old_price` — decimal/integer, старая цена
-- `description` — текст, краткое описание
-- `features` — long text, JSON-массив строк или многострочный текст
-- `payment_url` — строка, ссылка на оплату/YooKassa
-- `is_popular` — boolean, пометка рекомендуемого тарифа
-- `is_active` — boolean, активность тарифа
-- `sort_order` — integer, порядок вывода
+Frontend временно умеет прочитать старое строковое значение `features`, но штатный формат новой схемы — JSON array of strings.
 
 ## `speakers`
 
 Спикеры конференции.
 
-Поля:
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `name` | string | да | Имя |
+| `title` | string | да | Должность или роль |
+| `bio` | text | да | Биография |
+| `photo_url` | string | нет | Прямой публичный HTTPS URL; пустое значение включает avatar-заглушку |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
 
-- `name` — строка, имя
-- `title` — строка, должность/роль
-- `bio` — длинный текст, биография
-- `photo_url` — строка, URL фотографии
-- `is_active` — boolean, активность спикера
-- `sort_order` — integer, порядок вывода
+На текущем этапе используется `photo_url`, а не relation на Directus Files. Это сохраняет существующий frontend-контракт. Переход на Directus Files должен выполняться отдельной миграцией с asset URL mapping и правами на `directus_files`.
 
 ## `program`
 
 Пункты программы мероприятия.
 
-Поля:
-
-- `time_slot` — строка, время блока
-- `title` — строка, название блока
-- `speaker` — строка, имя спикера или команды
-- `description` — длинный текст, описание блока
-- `is_active` — boolean, активность пункта
-- `sort_order` — integer, порядок вывода
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `time_slot` | string | да | Отображаемое время блока |
+| `title` | string | да | Название блока |
+| `speaker` | string | нет | Имя спикера или команды |
+| `description` | text | нет | Описание блока |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
 
 ## `faq`
 
 Часто задаваемые вопросы.
 
-Поля:
-
-- `question` — строка, вопрос
-- `answer` — длинный текст, ответ
-- `is_active` — boolean, активность вопроса
-- `sort_order` — integer, порядок вывода
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `question` | string | да | Вопрос |
+| `answer` | text | да | Ответ |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
 
 ## `legal_pages`
 
 Юридические ссылки для футера.
 
-Поля:
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `title` | string | да | Название ссылки |
+| `url` | string | да | Публичный HTTPS URL документа |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
 
-- `title` — строка, название ссылки
-- `url` — строка, URL страницы
-- `is_active` — boolean, показывать ли ссылку
-- `sort_order` — integer, порядок вывода
+## Ожидаемые публичные запросы
+
+Списковые коллекции запрашиваются с сортировкой и фильтром активности:
+
+```text
+sort=sort_order
+limit=-1
+filter[is_active][_eq]=true
+```
+
+`site_settings` и `event_config` запрашиваются с `limit=1`. Наличие более одной записи считается ошибкой управления контентом и должно предотвращаться процессом настройки Directus.

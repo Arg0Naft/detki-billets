@@ -39,9 +39,7 @@ export function AdminDashboard() {
                 key={s.id}
                 onClick={() => setActive(s.id)}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${
-                  isActive
-                    ? "bg-[#0EA5E9] text-white"
-                    : "text-[#64748B] hover:bg-slate-100"
+                  isActive ? "bg-[#0EA5E9] text-white" : "text-[#64748B] hover:bg-slate-100"
                 }`}
               >
                 <Icon className="h-4 w-4" />

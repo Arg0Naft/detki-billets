@@ -1,5 +1,7 @@
+export type DirectusId = string;
+
 export interface SiteSettings {
-  $id?: string;
+  id: DirectusId;
   site_name: string;
   footer_description: string;
   contact_email: string;
@@ -12,7 +14,7 @@ export interface SiteSettings {
 }
 
 export interface EventConfig {
-  $id?: string;
+  id: DirectusId;
   title: string;
   subtitle: string;
   date: string;
@@ -25,12 +27,12 @@ export interface EventConfig {
 }
 
 export interface Ticket {
-  $id: string;
+  id: DirectusId;
   name: string;
   price: number;
   old_price: number;
   description: string;
-  features: string; // JSON array string
+  features: string[];
   payment_url?: string;
   is_popular: boolean;
   is_active?: boolean;
@@ -38,7 +40,7 @@ export interface Ticket {
 }
 
 export interface Speaker {
-  $id: string;
+  id: DirectusId;
   name: string;
   title: string;
   bio: string;
@@ -48,7 +50,7 @@ export interface Speaker {
 }
 
 export interface FaqItem {
-  $id: string;
+  id: DirectusId;
   question: string;
   answer: string;
   is_active?: boolean;
@@ -56,7 +58,7 @@ export interface FaqItem {
 }
 
 export interface ProgramItem {
-  $id: string;
+  id: DirectusId;
   time_slot: string;
   title: string;
   speaker: string;
@@ -66,7 +68,7 @@ export interface ProgramItem {
 }
 
 export interface LegalPage {
-  $id: string;
+  id: DirectusId;
   title: string;
   url: string;
   is_active?: boolean;

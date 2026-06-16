@@ -25,18 +25,18 @@ export function AdminSpeakers() {
   const [list, setList] = useState<Speaker[]>([]);
   const [draft, setDraft] = useState(empty);
 
-  const load = () => getSpeakers().then(setList);
+  const load = () => getSpeakers({ includeInactive: true }).then(setList);
   useEffect(() => {
     load();
   }, []);
 
   function patch(id: string, p: Partial<Speaker>) {
-    setList((prev) => prev.map((s) => (s.$id === id ? { ...s, ...p } : s)));
+    setList((prev) => prev.map((s) => (s.id === id ? { ...s, ...p } : s)));
   }
 
   async function save(s: Speaker) {
     try {
-      await updateSpeaker(s.$id, {
+      await updateSpeaker(s.id, {
         name: s.name,
         title: s.title,
         bio: s.bio,
@@ -53,7 +53,7 @@ export function AdminSpeakers() {
   async function remove(id: string) {
     try {
       await deleteSpeaker(id);
-      setList((prev) => prev.filter((s) => s.$id !== id));
+      setList((prev) => prev.filter((s) => s.id !== id));
       toast.success("Удалено");
     } catch (e) {
       console.error(e);
@@ -121,21 +121,21 @@ export function AdminSpeakers() {
 
       <div className="space-y-4">
         {list.map((s) => (
-          <div key={s.$id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
+          <div key={s.id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
             <div className="grid gap-3 md:grid-cols-2">
               <div>
                 <Label className="mb-1.5 block">Имя</Label>
-                <Input value={s.name} onChange={(e) => patch(s.$id, { name: e.target.value })} />
+                <Input value={s.name} onChange={(e) => patch(s.id, { name: e.target.value })} />
               </div>
               <div>
                 <Label className="mb-1.5 block">Должность</Label>
-                <Input value={s.title} onChange={(e) => patch(s.$id, { title: e.target.value })} />
+                <Input value={s.title} onChange={(e) => patch(s.id, { title: e.target.value })} />
               </div>
               <div>
                 <Label className="mb-1.5 block">URL фото</Label>
                 <Input
                   value={s.photo_url}
-                  onChange={(e) => patch(s.$id, { photo_url: e.target.value })}
+                  onChange={(e) => patch(s.id, { photo_url: e.target.value })}
                 />
               </div>
               <div>
@@ -143,7 +143,7 @@ export function AdminSpeakers() {
                 <Input
                   type="number"
                   value={s.sort_order}
-                  onChange={(e) => patch(s.$id, { sort_order: Number(e.target.value) })}
+                  onChange={(e) => patch(s.id, { sort_order: Number(e.target.value) })}
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ export function AdminSpeakers() {
               <Textarea
                 rows={3}
                 value={s.bio}
-                onChange={(e) => patch(s.$id, { bio: e.target.value })}
+                onChange={(e) => patch(s.id, { bio: e.target.value })}
               />
             </div>
             <div className="flex gap-2">
@@ -177,7 +177,7 @@ export function AdminSpeakers() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Отмена</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => remove(s.$id)}>Удалить</AlertDialogAction>
+                    <AlertDialogAction onClick={() => remove(s.id)}>Удалить</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>

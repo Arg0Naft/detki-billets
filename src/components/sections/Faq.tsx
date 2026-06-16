@@ -22,8 +22,8 @@ export function Faq({ items }: { items: FaqItem[] }) {
         <Accordion type="single" collapsible className="mt-10 space-y-3">
           {items.map((f) => (
             <AccordionItem
-              key={f.$id}
-              value={f.$id}
+              key={f.id}
+              value={f.id}
               className="rounded-xl border border-slate-200 bg-white px-5"
             >
               <AccordionTrigger className="text-left text-base font-medium text-[#1E293B] hover:no-underline">

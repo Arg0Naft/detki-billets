@@ -8,35 +8,29 @@ import { toast } from "sonner";
 import { getTickets, updateTicket } from "@/lib/directus";
 import type { Ticket } from "@/types";
 
-function featuresToText(s: string) {
-  try {
-    const arr = JSON.parse(s);
-    return Array.isArray(arr) ? arr.join("\n") : "";
-  } catch {
-    return s;
-  }
+function featuresToText(features: string[]) {
+  return features.join("\n");
+}
+
+function featuresFromText(value: string) {
+  return value.split("\n");
 }
 
 export function AdminTickets() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
 
   useEffect(() => {
-    getTickets().then(setTickets);
+    getTickets({ includeInactive: true }).then(setTickets);
   }, []);
 
   function patch(id: string, patchData: Partial<Ticket>) {
-    setTickets((prev) => prev.map((t) => (t.$id === id ? { ...t, ...patchData } : t)));
+    setTickets((prev) => prev.map((t) => (t.id === id ? { ...t, ...patchData } : t)));
   }
 
   async function save(t: Ticket) {
     try {
-      const features = JSON.stringify(
-        featuresToText(t.features)
-          .split("\n")
-          .map((x) => x.trim())
-          .filter(Boolean),
-      );
-      await updateTicket(t.$id, {
+      const features = t.features.map((item) => item.trim()).filter(Boolean);
+      await updateTicket(t.id, {
         name: t.name,
         price: Number(t.price),
         old_price: Number(t.old_price),
@@ -57,24 +51,24 @@ export function AdminTickets() {
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold text-[#1E293B]">Билеты</h2>
       {tickets.map((t) => (
-        <div key={t.$id} className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
+        <div key={t.id} className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <Label className="mb-1.5 block">Название</Label>
-              <Input value={t.name} onChange={(e) => patch(t.$id, { name: e.target.value })} />
+              <Input value={t.name} onChange={(e) => patch(t.id, { name: e.target.value })} />
             </div>
             <div>
               <Label className="mb-1.5 block">Описание</Label>
               <Input
                 value={t.description}
-                onChange={(e) => patch(t.$id, { description: e.target.value })}
+                onChange={(e) => patch(t.id, { description: e.target.value })}
               />
             </div>
             <div className="md:col-span-2">
               <Label className="mb-1.5 block">Payment URL</Label>
               <Input
-                value={t.payment_url}
-                onChange={(e) => patch(t.$id, { payment_url: e.target.value })}
+                value={t.payment_url ?? ""}
+                onChange={(e) => patch(t.id, { payment_url: e.target.value })}
               />
             </div>
             <div>
@@ -82,7 +76,7 @@ export function AdminTickets() {
               <Input
                 type="number"
                 value={t.price}
-                onChange={(e) => patch(t.$id, { price: Number(e.target.value) })}
+                onChange={(e) => patch(t.id, { price: Number(e.target.value) })}
               />
             </div>
             <div>
@@ -90,7 +84,7 @@ export function AdminTickets() {
               <Input
                 type="number"
                 value={t.old_price}
-                onChange={(e) => patch(t.$id, { old_price: Number(e.target.value) })}
+                onChange={(e) => patch(t.id, { old_price: Number(e.target.value) })}
               />
             </div>
           </div>
@@ -100,7 +94,7 @@ export function AdminTickets() {
             <Textarea
               rows={5}
               value={featuresToText(t.features)}
-              onChange={(e) => patch(t.$id, { features: e.target.value })}
+              onChange={(e) => patch(t.id, { features: featuresFromText(e.target.value) })}
             />
           </div>
 
@@ -108,7 +102,7 @@ export function AdminTickets() {
             <div className="flex items-center gap-2">
               <Switch
                 checked={t.is_popular}
-                onCheckedChange={(v) => patch(t.$id, { is_popular: v })}
+                onCheckedChange={(v) => patch(t.id, { is_popular: v })}
               />
               <span className="text-sm text-[#1E293B]">Популярный</span>
             </div>
@@ -118,7 +112,7 @@ export function AdminTickets() {
                 type="number"
                 className="w-24"
                 value={t.sort_order}
-                onChange={(e) => patch(t.$id, { sort_order: Number(e.target.value) })}
+                onChange={(e) => patch(t.id, { sort_order: Number(e.target.value) })}
               />
             </div>
             <Button

@@ -20,7 +20,7 @@ export function Program({ items }: { items: ProgramItem[] }) {
         <div className="mt-12 space-y-4">
           {items.map((item) => (
             <article
-              key={item.$id}
+              key={item.id}
               className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-[120px_1fr]"
             >
               <div className="text-sm font-semibold uppercase tracking-wide text-[#0EA5E9]">
