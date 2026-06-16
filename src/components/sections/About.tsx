@@ -1,4 +1,10 @@
 import { BookOpen, Heart, Sparkles } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import type { EventConfig, EventDescription } from "@/types";
 
 const highlights = [
@@ -32,26 +38,47 @@ export function About({
   config: EventConfig;
   descriptions: EventDescription[] | null;
 }) {
-  const paragraphs =
-    descriptions === null
-      ? [config.description_1, config.description_2].filter(Boolean)
-      : descriptions.map((item) => item.text).filter(Boolean);
+  const fallbackDescriptions: EventDescription[] = [
+    {
+      id: "event-description-fallback-1",
+      title: "О конференции",
+      text: config.description_1,
+      sort_order: 1,
+    },
+    {
+      id: "event-description-fallback-2",
+      title: "Что получат участники",
+      text: config.description_2,
+      sort_order: 2,
+    },
+  ].filter((item) => item.text);
+
+  const items = descriptions === null ? fallbackDescriptions : descriptions;
 
   return (
     <section id="about" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
             О мероприятии
           </h2>
-          {paragraphs.map((paragraph, index) => (
-            <p
-              key={`${index}-${paragraph}`}
-              className={`${index === 0 ? "mt-6" : "mt-4"} text-base leading-relaxed text-[#64748B] md:text-lg`}
-            >
-              {paragraph}
-            </p>
-          ))}
+
+          <Accordion type="single" collapsible className="mt-10 space-y-3">
+            {items.map((item, index) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className="rounded-xl border border-slate-200 bg-white px-5"
+              >
+                <AccordionTrigger className="text-left text-base font-medium text-[#1E293B] hover:no-underline">
+                  {item.title?.trim() || `Подробнее ${index + 1}`}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm leading-relaxed text-[#64748B]">
+                  {item.text}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
