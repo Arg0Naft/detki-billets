@@ -74,7 +74,10 @@ export function About({
         {highlights.length > 0 && (
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {highlights.map((highlight) => {
-              const iconKey = highlight.icon in iconMap ? (highlight.icon as keyof typeof iconMap) : "sparkles";
+              const iconKey =
+                highlight.icon in iconMap
+                  ? (highlight.icon as keyof typeof iconMap)
+                  : "sparkles";
               const Icon = iconMap[iconKey];
               const style = iconStyles[iconKey];
 
