@@ -23,6 +23,7 @@ export interface EventConfig {
   location_address: string;
   description_1: string;
   description_2: string;
+  hero_badge?: string;
   sales_enabled: boolean;
 }
 
@@ -30,6 +31,15 @@ export interface EventDescription {
   id: DirectusId;
   title?: string;
   text: string;
+  is_active?: boolean;
+  sort_order: number;
+}
+
+export interface EventHighlight {
+  id: DirectusId;
+  title: string;
+  text: string;
+  icon: "book" | "heart" | "sparkles" | string;
   is_active?: boolean;
   sort_order: number;
 }
