@@ -25,18 +25,18 @@ export function AdminFaq() {
   const [list, setList] = useState<FaqItem[]>([]);
   const [draft, setDraft] = useState(empty);
 
-  const load = () => getFaq().then(setList);
+  const load = () => getFaq({ includeInactive: true }).then(setList);
   useEffect(() => {
     load();
   }, []);
 
   function patch(id: string, p: Partial<FaqItem>) {
-    setList((prev) => prev.map((f) => (f.$id === id ? { ...f, ...p } : f)));
+    setList((prev) => prev.map((f) => (f.id === id ? { ...f, ...p } : f)));
   }
 
   async function save(f: FaqItem) {
     try {
-      await updateFaqItem(f.$id, {
+      await updateFaqItem(f.id, {
         question: f.question,
         answer: f.answer,
         sort_order: Number(f.sort_order),
@@ -51,7 +51,7 @@ export function AdminFaq() {
   async function remove(id: string) {
     try {
       await deleteFaqItem(id);
-      setList((prev) => prev.filter((f) => f.$id !== id));
+      setList((prev) => prev.filter((f) => f.id !== id));
       toast.success("Удалено");
     } catch (e) {
       console.error(e);
@@ -108,20 +108,17 @@ export function AdminFaq() {
 
       <div className="space-y-4">
         {list.map((f) => (
-          <div key={f.$id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
+          <div key={f.id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
             <div>
               <Label className="mb-1.5 block">Вопрос</Label>
-              <Input
-                value={f.question}
-                onChange={(e) => patch(f.$id, { question: e.target.value })}
-              />
+              <Input value={f.question} onChange={(e) => patch(f.id, { question: e.target.value })} />
             </div>
             <div>
               <Label className="mb-1.5 block">Ответ</Label>
               <Textarea
                 rows={3}
                 value={f.answer}
-                onChange={(e) => patch(f.$id, { answer: e.target.value })}
+                onChange={(e) => patch(f.id, { answer: e.target.value })}
               />
             </div>
             <div className="flex items-center gap-3">
@@ -130,7 +127,7 @@ export function AdminFaq() {
                 type="number"
                 className="w-24"
                 value={f.sort_order}
-                onChange={(e) => patch(f.$id, { sort_order: Number(e.target.value) })}
+                onChange={(e) => patch(f.id, { sort_order: Number(e.target.value) })}
               />
               <Button
                 onClick={() => save(f)}
@@ -151,7 +148,7 @@ export function AdminFaq() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Отмена</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => remove(f.$id)}>Удалить</AlertDialogAction>
+                    <AlertDialogAction onClick={() => remove(f.id)}>Удалить</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
