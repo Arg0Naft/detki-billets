@@ -21,7 +21,7 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {speakers.map((s) => (
             <div
-              key={s.$id}
+              key={s.id}
               className="mx-auto flex h-full w-full max-w-md flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition hover:shadow-md"
             >
               {s.photo_url ? (
