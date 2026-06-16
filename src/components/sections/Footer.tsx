@@ -79,7 +79,7 @@ export function Footer({
             <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-400">
               {legalPages.map((page) => (
                 <a
-                  key={page.$id}
+                  key={page.id}
                   href={page.url || "#"}
                   target="_blank"
                   rel="noreferrer"
