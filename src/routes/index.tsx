@@ -14,7 +14,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { settings, config, tickets, speakers, program, faq, legalPages, loading } = useEventData();
+  const { settings, config, descriptions, tickets, speakers, program, faq, legalPages, loading } =
+    useEventData();
 
   if (loading || !settings || !config) {
     return (
@@ -30,7 +31,7 @@ function Index() {
       <main>
         <Hero config={config} settings={settings} />
         <Speakers speakers={speakers} />
-        <About config={config} />
+        <About config={config} descriptions={descriptions} />
         <Program items={program} />
         <Tickets tickets={tickets} salesEnabled={config.sales_enabled} />
         <Faq items={faq} />
