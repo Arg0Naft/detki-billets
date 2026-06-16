@@ -26,6 +26,13 @@ export interface EventConfig {
   sales_enabled: boolean;
 }
 
+export interface EventDescription {
+  id: DirectusId;
+  text: string;
+  is_active?: boolean;
+  sort_order: number;
+}
+
 export interface Ticket {
   id: DirectusId;
   name: string;

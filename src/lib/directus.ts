@@ -1,5 +1,6 @@
 import type {
   EventConfig,
+  EventDescription,
   FaqItem,
   LegalPage,
   ProgramItem,
@@ -247,6 +248,27 @@ async function getOrderedItems<T>(
   }
 }
 
+async function getOptionalOrderedItems<T>(
+  collection: string,
+  options: CollectionQueryOptions = {},
+): Promise<T[] | null> {
+  try {
+    const params: Record<string, string> = {
+      sort: "sort_order",
+      limit: "-1",
+    };
+
+    if (!options.includeInactive) {
+      params["filter[is_active][_eq]"] = "true";
+    }
+
+    return await listItems<T>(collection, params);
+  } catch (err) {
+    warn(collection, err);
+    return null;
+  }
+}
+
 function normalizeFeatures(value: TicketApiItem["features"]): string[] {
   if (Array.isArray(value)) {
     return value.map(String);
@@ -304,6 +326,12 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 export async function getEventConfig(): Promise<EventConfig> {
   return getFirstItem("event_config", demoEventConfig);
+}
+
+export async function getEventDescriptions(
+  options: CollectionQueryOptions = {},
+): Promise<EventDescription[] | null> {
+  return getOptionalOrderedItems("event_descriptions", options);
 }
 
 export async function updateEventConfig(data: Partial<EventConfig>): Promise<void> {

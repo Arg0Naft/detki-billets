@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   getEventConfig,
+  getEventDescriptions,
   getFaq,
   getLegalPages,
   getProgram,
@@ -10,6 +11,7 @@ import {
 } from "@/lib/directus";
 import type {
   EventConfig,
+  EventDescription,
   FaqItem,
   LegalPage,
   ProgramItem,
@@ -21,6 +23,7 @@ import type {
 export function useEventData() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [config, setConfig] = useState<EventConfig | null>(null);
+  const [descriptions, setDescriptions] = useState<EventDescription[] | null>(null);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
   const [program, setProgram] = useState<ProgramItem[]>([]);
@@ -33,6 +36,7 @@ export function useEventData() {
     Promise.all([
       getSiteSettings(),
       getEventConfig(),
+      getEventDescriptions(),
       getTickets(),
       getSpeakers(),
       getProgram(),
@@ -43,6 +47,7 @@ export function useEventData() {
         ([
           siteSettings,
           eventConfig,
+          eventDescriptions,
           siteTickets,
           siteSpeakers,
           siteProgram,
@@ -52,6 +57,7 @@ export function useEventData() {
           if (!active) return;
           setSettings(siteSettings);
           setConfig(eventConfig);
+          setDescriptions(eventDescriptions);
           setTickets(siteTickets);
           setSpeakers(siteSpeakers);
           setProgram(siteProgram);
@@ -65,5 +71,5 @@ export function useEventData() {
     };
   }, []);
 
-  return { settings, config, tickets, speakers, program, faq, legalPages, loading };
+  return { settings, config, descriptions, tickets, speakers, program, faq, legalPages, loading };
 }

@@ -44,9 +44,22 @@
 | `time` | string | да | Отображаемое время |
 | `location` | string | да | Город или краткое название площадки |
 | `location_address` | string | да | Полный адрес |
-| `description_1` | text | да | Первый абзац описания |
-| `description_2` | text | да | Второй абзац описания |
+| `description_1` | text | да | Временный fallback до заполнения `event_descriptions` |
+| `description_2` | text | да | Временный fallback до заполнения `event_descriptions` |
 | `sales_enabled` | boolean | да | По умолчанию `false` до подключения оплаты |
+
+## `event_descriptions`
+
+Управляемые абзацы раздела «О мероприятии». Каждая запись — отдельный абзац. Записи можно добавлять, скрывать и переставлять без изменения схемы.
+
+| Поле | Тип | Обязательное | Примечание |
+| --- | --- | --- | --- |
+| `id` | UUID | да | Primary key |
+| `text` | text | да | Текст абзаца |
+| `is_active` | boolean | да | По умолчанию `true` |
+| `sort_order` | integer | да | По умолчанию `0` |
+
+Если коллекция недоступна, frontend временно использует `description_1` и `description_2` из `event_config`. Если коллекция доступна, но в ней нет активных записей, абзацы описания не отображаются.
 
 ## `tickets`
 
@@ -130,5 +143,7 @@ sort=sort_order
 limit=-1
 filter[is_active][_eq]=true
 ```
+
+К ним относятся `event_descriptions`, `tickets`, `speakers`, `program`, `faq` и `legal_pages`.
 
 `site_settings` и `event_config` запрашиваются с `limit=1`. Наличие более одной записи считается ошибкой управления контентом и должно предотвращаться процессом настройки Directus.
