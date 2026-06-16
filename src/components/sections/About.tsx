@@ -16,7 +16,7 @@ const iconMap = {
 const iconStyles = {
   book: { color: "text-[#0EA5E9]", bg: "bg-[#E0F2FE]" },
   heart: { color: "text-[#EC4899]", bg: "bg-[#FCE7F3]" },
-  sparkles: { color: "text-[#0EA5E9]", bg: "bg-[#E0F2FE]" },
+  sparkles: { color: "text-[#0EA5E9]", bg: "bg-[#E2F2FE]" },
 };
 
 export function About({
@@ -31,7 +31,7 @@ export function About({
   const fallbackDescriptions: EventDescription[] = [
     {
       id: "event-description-fallback-1",
-      title: "О конференции",
+      title: "Ϛ конфесренции",
       text: config.description_1,
       sort_order: 1,
     },
@@ -61,7 +61,7 @@ export function About({
                 className="rounded-xl border border-slate-200 bg-white px-5"
               >
                 <AccordionTrigger className="text-left text-base font-medium text-[#1E293B] hover:no-underline">
-                  {item.title?.trim() || `Подробнее ${index + 1}`}
+                  {item.title?.trim() || `�одробнее ${index + 1}`}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-[#64748B]">
                   {item.text}
@@ -75,16 +75,14 @@ export function About({
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {highlights.map((highlight) => {
               const iconKey =
-                highlight.icon in iconMap
-                  ? (highlight.icon as keyof typeof iconMap)
-                  : "sparkles";
+                highlight.icon in iconMap ? (highlight.icon as keyof typeof iconMap) : "sparkles";
               const Icon = iconMap[iconKey];
               const style = iconStyles[iconKey];
 
               return (
                 <div
                   key={highlight.id}
-                  className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-2xl border border-slate-100 bg-white p6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <div
                     className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${style.bg}`}
