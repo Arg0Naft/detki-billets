@@ -16,9 +16,11 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#EC4899]/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6">
-        <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#0EA5E9] shadow-sm ring-1 ring-[#0EA5E9]/20">
-          Однодневная конференция
-        </span>
+        {config.hero_badge?.trim() && (
+          <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#0EA5E9] shadow-sm ring-1 ring-[#0EA5E9]/20">
+            {config.hero_badge}
+          </span>
+        )}
 
         <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[#1E293B] md:text-6xl">
           {config.title}
