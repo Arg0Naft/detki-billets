@@ -111,7 +111,10 @@ export function AdminFaq() {
           <div key={f.id} className="space-y-3 rounded-xl border border-slate-200 bg-white p-5">
             <div>
               <Label className="mb-1.5 block">Вопрос</Label>
-              <Input value={f.question} onChange={(e) => patch(f.id, { question: e.target.value })} />
+              <Input
+                value={f.question}
+                onChange={(e) => patch(f.id, { question: e.target.value })}
+              />
             </div>
             <div>
               <Label className="mb-1.5 block">Ответ</Label>

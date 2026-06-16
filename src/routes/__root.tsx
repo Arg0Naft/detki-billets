@@ -88,11 +88,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Конференция для молодых мам — билеты и программа" },
-      { name: "description", content: "A single-page Russian-language website for selling event tickets." },
-      { property: "og:description", content: "A single-page Russian-language website for selling event tickets." },
-      { name: "twitter:description", content: "A single-page Russian-language website for selling event tickets." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8c97ca69-5203-4979-92a1-988228184335/id-preview-3a1b5142--debc0ed7-59fd-405a-8677-1787c2b2d99f.lovable.app-1779867638242.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8c97ca69-5203-4979-92a1-988228184335/id-preview-3a1b5142--debc0ed7-59fd-405a-8677-1787c2b2d99f.lovable.app-1779867638242.png" },
+      {
+        name: "description",
+        content: "A single-page Russian-language website for selling event tickets.",
+      },
+      {
+        property: "og:description",
+        content: "A single-page Russian-language website for selling event tickets.",
+      },
+      {
+        name: "twitter:description",
+        content: "A single-page Russian-language website for selling event tickets.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8c97ca69-5203-4979-92a1-988228184335/id-preview-3a1b5142--debc0ed7-59fd-405a-8677-1787c2b2d99f.lovable.app-1779867638242.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8c97ca69-5203-4979-92a1-988228184335/id-preview-3a1b5142--debc0ed7-59fd-405a-8677-1787c2b2d99f.lovable.app-1779867638242.png",
+      },
     ],
     links: [
       {
