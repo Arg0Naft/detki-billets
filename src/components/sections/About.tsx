@@ -31,7 +31,7 @@ export function About({
   const fallbackDescriptions: EventDescription[] = [
     {
       id: "event-description-fallback-1",
-      title: "Ϛ конфесренции",
+      title: "О конференции",
       text: config.description_1,
       sort_order: 1,
     },
@@ -61,7 +61,7 @@ export function About({
                 className="rounded-xl border border-slate-200 bg-white px-5"
               >
                 <AccordionTrigger className="text-left text-base font-medium text-[#1E293B] hover:no-underline">
-                  {item.title?.trim() || `�одробнее ${index + 1}`}
+                  {item.title?.trim() || `Подробнее ${index + 1}`}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-[#64748B]">
                   {item.text}
@@ -82,7 +82,7 @@ export function About({
               return (
                 <div
                   key={highlight.id}
-                  className="rounded-2xl border border-slate-100 bg-white p6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
                 >
                   <div
                     className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${style.bg}`}
