@@ -71,7 +71,10 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
 
               <ul className="mt-7 flex-1 space-y-3.5">
                 {ticket.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3 text-sm leading-6 text-slate-700">
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 text-sm leading-6 text-slate-700"
+                  >
                     <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#E0F2FE]">
                       <Check className="h-3.5 w-3.5 text-[#0284C7]" />
                     </span>

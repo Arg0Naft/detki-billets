@@ -95,12 +95,9 @@ export function Hero({ config }: { config: EventConfig }) {
                   <MapPin className="h-4 w-4 text-[#EC4899]" />
                   {config.location}
                 </div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  {config.location_address}
-                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{config.location_address}</p>
               </div>
             </div>
-
           </aside>
         </div>
       </div>

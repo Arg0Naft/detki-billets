@@ -86,7 +86,11 @@ export function About({
                 const Icon = iconMap[iconKey];
                 const style = iconStyles[iconKey];
                 const cardClass =
-                  index === 1 ? "surface-card-warm" : index === 2 ? "surface-card-strong" : "surface-card";
+                  index === 1
+                    ? "surface-card-warm"
+                    : index === 2
+                      ? "surface-card-strong"
+                      : "surface-card";
 
                 return (
                   <div key={highlight.id} className={`${cardClass} rounded-[1.8rem] p-6`}>

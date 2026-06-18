@@ -36,9 +36,7 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
 
         <div
           className={`mt-14 ${
-            hasSingleSpeaker
-              ? "mx-auto max-w-5xl"
-              : "grid gap-6 md:grid-cols-2"
+            hasSingleSpeaker ? "mx-auto max-w-5xl" : "grid gap-6 md:grid-cols-2"
           }`}
         >
           {speakers.map((s) => (
@@ -72,7 +70,9 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
                   </div>
                 )}
 
-                <div className={`flex-1 ${hasSingleSpeaker ? "text-center lg:text-left" : "text-center md:text-left"}`}>
+                <div
+                  className={`flex-1 ${hasSingleSpeaker ? "text-center lg:text-left" : "text-center md:text-left"}`}
+                >
                   <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-slate-400">
                     {hasSingleSpeaker ? "Главный спикер конференции" : "Эксперт конференции"}
                   </p>
@@ -92,7 +92,9 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
                   </p>
                   <p
                     className={`mt-4 text-slate-600 ${
-                      hasSingleSpeaker ? "mx-auto max-w-2xl text-base leading-8 lg:mx-0" : "text-sm leading-7"
+                      hasSingleSpeaker
+                        ? "mx-auto max-w-2xl text-base leading-8 lg:mx-0"
+                        : "text-sm leading-7"
                     }`}
                   >
                     {s.bio}
