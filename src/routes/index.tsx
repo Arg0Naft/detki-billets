@@ -29,17 +29,17 @@ function Index() {
 
   if (loading || !settings || !config) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white">
+      <div className="site-shell flex min-h-screen items-center justify-center">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#0EA5E9]/20 border-t-[#0EA5E9]" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#1E293B]">
+    <div className="site-shell min-h-screen text-[#1E293B]">
       <Header title={settings.site_name || config.title} />
       <main>
-        <Hero config={config} settings={settings} />
+        <Hero config={config} />
         <Speakers speakers={speakers} />
         <About config={config} descriptions={descriptions} highlights={highlights} />
         <Program items={program} />

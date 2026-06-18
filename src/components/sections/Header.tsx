@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const links = [
   { href: "#about", label: "О событии" },
@@ -42,24 +43,33 @@ export function Header({ title }: { title: string }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         visible ? "translate-y-0" : "-translate-y-full"
-      } ${scrolled ? "bg-white/90 backdrop-blur shadow-sm" : "bg-white/70 backdrop-blur"}`}
+      } ${
+        scrolled
+          ? "border-b border-white/80 bg-white/92 shadow-[0_20px_50px_-34px_rgba(15,23,42,0.4)] backdrop-blur-xl"
+          : "bg-white/72 backdrop-blur-lg"
+      }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+      <div className="site-container flex items-center justify-between py-3.5">
         <button
           onClick={() => scrollTo("#top")}
-          className="text-left text-base font-semibold text-[#1E293B] md:text-lg"
+          className="group flex flex-col items-start text-left"
         >
-          <span className="bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
-            {title || "Конференция"}
+          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-400 transition group-hover:text-slate-500">
+            Семейная конференция
+          </span>
+          <span className="bg-gradient-to-r from-[#0284C7] via-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
+            <span className="text-base font-extrabold tracking-[-0.04em] md:text-xl">
+              {title || "Конференция"}
+            </span>
           </span>
         </button>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1.5 md:flex">
           {links.map((l) => (
             <button
               key={l.href}
               onClick={() => scrollTo(l.href)}
-              className="text-sm font-medium text-[#64748B] transition hover:text-[#0EA5E9]"
+              className="rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
             >
               {l.label}
             </button>
@@ -69,23 +79,35 @@ export function Header({ title }: { title: string }) {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => scrollTo("#tickets")}
-            className="hidden bg-[#0EA5E9] text-white hover:bg-[#0284C7] md:inline-flex"
+            className="hidden rounded-full bg-[#0EA5E9] px-5 text-white md:inline-flex"
           >
             Купить билет
           </Button>
-          <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="Меню">
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-full border-white/80 bg-white/90 px-3.5 md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Меню"
+          >
             {open ? (
-              <X className="h-6 w-6 text-[#1E293B]" />
+              <>
+                <X className="h-4 w-4 text-slate-900" />
+                <span>Закрыть</span>
+              </>
             ) : (
-              <Menu className="h-6 w-6 text-[#1E293B]" />
+              <>
+                <Menu className="h-4 w-4 text-slate-900" />
+                <span>Меню</span>
+              </>
             )}
-          </button>
+          </Button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-slate-100 bg-white md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col px-4 py-3">
+        <div className="border-t border-slate-100/80 bg-white/96 shadow-[0_24px_40px_-36px_rgba(15,23,42,0.5)] md:hidden">
+          <div className="site-container flex flex-col gap-2 py-4">
             {links.map((l) => (
               <button
                 key={l.href}
@@ -93,7 +115,7 @@ export function Header({ title }: { title: string }) {
                   setOpen(false);
                   scrollTo(l.href);
                 }}
-                className="py-2 text-left text-sm font-medium text-[#1E293B]"
+                className="rounded-2xl px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
               >
                 {l.label}
               </button>
@@ -103,7 +125,7 @@ export function Header({ title }: { title: string }) {
                 setOpen(false);
                 scrollTo("#tickets");
               }}
-              className="mt-2 bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
+              className="mt-3 rounded-2xl bg-[#0EA5E9] text-white"
             >
               Купить билет
             </Button>
