@@ -45,26 +45,31 @@ export function Header({ title }: { title: string }) {
         visible ? "translate-y-0" : "-translate-y-full"
       } ${
         scrolled
-          ? "border-b border-white/80 bg-white/90 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.45)] backdrop-blur-xl"
+          ? "border-b border-white/80 bg-white/92 shadow-[0_20px_50px_-34px_rgba(15,23,42,0.4)] backdrop-blur-xl"
           : "bg-white/72 backdrop-blur-lg"
       }`}
     >
-      <div className="site-container flex items-center justify-between py-4">
+      <div className="site-container flex items-center justify-between py-3.5">
         <button
           onClick={() => scrollTo("#top")}
-          className="text-left text-base font-semibold text-slate-950 md:text-lg"
+          className="group flex flex-col items-start text-left"
         >
+          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-400 transition group-hover:text-slate-500">
+            Семейная конференция
+          </span>
           <span className="bg-gradient-to-r from-[#0284C7] via-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
-            {title || "Конференция"}
+            <span className="text-base font-extrabold tracking-[-0.04em] md:text-xl">
+              {title || "Конференция"}
+            </span>
           </span>
         </button>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1.5 md:flex">
           {links.map((l) => (
             <button
               key={l.href}
               onClick={() => scrollTo(l.href)}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+              className="rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
             >
               {l.label}
             </button>
@@ -74,24 +79,34 @@ export function Header({ title }: { title: string }) {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => scrollTo("#tickets")}
-            className="hidden rounded-xl bg-[#0EA5E9] text-white md:inline-flex"
+            className="hidden rounded-full bg-[#0EA5E9] px-5 text-white md:inline-flex"
           >
             Купить билет
           </Button>
           <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-xl md:hidden"
+            variant="outline"
+            size="sm"
+            className="rounded-full border-white/80 bg-white/90 px-3.5 md:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Меню"
           >
-            {open ? <X className="h-5 w-5 text-slate-900" /> : <Menu className="h-5 w-5 text-slate-900" />}
+            {open ? (
+              <>
+                <X className="h-4 w-4 text-slate-900" />
+                <span>Закрыть</span>
+              </>
+            ) : (
+              <>
+                <Menu className="h-4 w-4 text-slate-900" />
+                <span>Меню</span>
+              </>
+            )}
           </Button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-slate-100/80 bg-white/95 md:hidden">
+        <div className="border-t border-slate-100/80 bg-white/96 shadow-[0_24px_40px_-36px_rgba(15,23,42,0.5)] md:hidden">
           <div className="site-container flex flex-col gap-2 py-4">
             {links.map((l) => (
               <button
@@ -100,7 +115,7 @@ export function Header({ title }: { title: string }) {
                   setOpen(false);
                   scrollTo(l.href);
                 }}
-                className="rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
+                className="rounded-2xl px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
               >
                 {l.label}
               </button>
@@ -110,7 +125,7 @@ export function Header({ title }: { title: string }) {
                 setOpen(false);
                 scrollTo("#tickets");
               }}
-              className="mt-2 rounded-xl bg-[#0EA5E9] text-white"
+              className="mt-3 rounded-2xl bg-[#0EA5E9] text-white"
             >
               Купить билет
             </Button>

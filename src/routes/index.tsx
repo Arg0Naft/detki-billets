@@ -39,7 +39,7 @@ function Index() {
     <div className="site-shell min-h-screen text-[#1E293B]">
       <Header title={settings.site_name || config.title} />
       <main>
-        <Hero config={config} settings={settings} />
+        <Hero config={config} />
         <Speakers speakers={speakers} />
         <About config={config} descriptions={descriptions} highlights={highlights} />
         <Program items={program} />
