@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const links = [
   { href: "#about", label: "О событии" },
@@ -42,24 +43,28 @@ export function Header({ title }: { title: string }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         visible ? "translate-y-0" : "-translate-y-full"
-      } ${scrolled ? "bg-white/90 backdrop-blur shadow-sm" : "bg-white/70 backdrop-blur"}`}
+      } ${
+        scrolled
+          ? "border-b border-white/80 bg-white/90 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.45)] backdrop-blur-xl"
+          : "bg-white/72 backdrop-blur-lg"
+      }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+      <div className="site-container flex items-center justify-between py-4">
         <button
           onClick={() => scrollTo("#top")}
-          className="text-left text-base font-semibold text-[#1E293B] md:text-lg"
+          className="text-left text-base font-semibold text-slate-950 md:text-lg"
         >
-          <span className="bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#0284C7] via-[#0EA5E9] to-[#EC4899] bg-clip-text text-transparent">
             {title || "Конференция"}
           </span>
         </button>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <button
               key={l.href}
               onClick={() => scrollTo(l.href)}
-              className="text-sm font-medium text-[#64748B] transition hover:text-[#0EA5E9]"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
             >
               {l.label}
             </button>
@@ -69,23 +74,25 @@ export function Header({ title }: { title: string }) {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => scrollTo("#tickets")}
-            className="hidden bg-[#0EA5E9] text-white hover:bg-[#0284C7] md:inline-flex"
+            className="hidden rounded-xl bg-[#0EA5E9] text-white md:inline-flex"
           >
             Купить билет
           </Button>
-          <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="Меню">
-            {open ? (
-              <X className="h-6 w-6 text-[#1E293B]" />
-            ) : (
-              <Menu className="h-6 w-6 text-[#1E293B]" />
-            )}
-          </button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-xl md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Меню"
+          >
+            {open ? <X className="h-5 w-5 text-slate-900" /> : <Menu className="h-5 w-5 text-slate-900" />}
+          </Button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-slate-100 bg-white md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col px-4 py-3">
+        <div className="border-t border-slate-100/80 bg-white/95 md:hidden">
+          <div className="site-container flex flex-col gap-2 py-4">
             {links.map((l) => (
               <button
                 key={l.href}
@@ -93,7 +100,7 @@ export function Header({ title }: { title: string }) {
                   setOpen(false);
                   scrollTo(l.href);
                 }}
-                className="py-2 text-left text-sm font-medium text-[#1E293B]"
+                className="rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950"
               >
                 {l.label}
               </button>
@@ -103,7 +110,7 @@ export function Header({ title }: { title: string }) {
                 setOpen(false);
                 scrollTo("#tickets");
               }}
-              className="mt-2 bg-[#0EA5E9] text-white hover:bg-[#0284C7]"
+              className="mt-2 rounded-xl bg-[#0EA5E9] text-white"
             >
               Купить билет
             </Button>

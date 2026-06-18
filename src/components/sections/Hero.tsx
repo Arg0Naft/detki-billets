@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import type { EventConfig, SiteSettings } from "@/types";
 
 function scrollTo(id: string) {
@@ -8,38 +9,36 @@ function scrollTo(id: string) {
 
 export function Hero({ config, settings }: { config: EventConfig; settings: SiteSettings }) {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-gradient-to-b from-[#E0F2FE] via-[#F0F9FF] to-white pt-28 pb-20 md:pt-36 md:pb-28"
-    >
-      <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[#0EA5E9]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-[#EC4899]/10 blur-3xl" />
+    <section id="top" className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-24">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-[#BAE6FD]/55 via-white/40 to-transparent" />
+      <div className="pointer-events-none absolute -top-24 right-[-7rem] h-80 w-80 rounded-full bg-[#0EA5E9]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-28 left-[-6rem] h-72 w-72 rounded-full bg-[#EC4899]/8 blur-3xl" />
 
-      <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6">
+      <div className="site-container relative max-w-5xl text-center">
         {config.hero_badge?.trim() && (
-          <span className="inline-flex items-center rounded-full bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#0EA5E9] shadow-sm ring-1 ring-[#0EA5E9]/20">
+          <span className="soft-pill inline-flex items-center rounded-full border border-[#BAE6FD] bg-white/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#0284C7]">
             {config.hero_badge}
           </span>
         )}
 
-        <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-[#1E293B] md:text-6xl">
+        <h1 className="mx-auto mt-7 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-slate-950 md:text-6xl">
           {config.title}
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-base text-[#64748B] md:text-lg">
+        <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 md:text-lg">
           {config.subtitle}
         </p>
 
-        <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 text-sm text-[#1E293B] md:flex-row md:gap-6 md:text-base">
-          <div className="inline-flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-[#0EA5E9]" />
+        <div className="mx-auto mt-9 flex flex-col items-center justify-center gap-3 text-sm text-slate-700 md:flex-row md:gap-4 md:text-[15px]">
+          <div className="soft-pill inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2">
+            <Calendar className="h-4 w-4 text-[#0EA5E9]" />
             <span>{config.date}</span>
           </div>
-          <div className="inline-flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[#0EA5E9]" />
+          <div className="soft-pill inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2">
+            <Clock className="h-4 w-4 text-[#0EA5E9]" />
             <span>{config.time}</span>
           </div>
-          <div className="inline-flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-[#EC4899]" />
+          <div className="soft-pill inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2">
+            <MapPin className="h-4 w-4 text-[#EC4899]" />
             <span>{config.location}</span>
           </div>
         </div>
@@ -48,7 +47,7 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
           <Button
             size="lg"
             onClick={() => scrollTo("#tickets")}
-            className="w-full bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/30 hover:bg-[#0284C7] sm:w-auto"
+            className="w-full rounded-xl bg-[#0EA5E9] text-white sm:w-auto"
           >
             Купить билет
           </Button>
@@ -56,25 +55,25 @@ export function Hero({ config, settings }: { config: EventConfig; settings: Site
             size="lg"
             variant="outline"
             onClick={() => scrollTo("#about")}
-            className="w-full border-[#0EA5E9]/30 bg-white text-[#0EA5E9] hover:bg-[#0EA5E9]/5 sm:w-auto"
+            className="w-full rounded-xl border-slate-200 bg-white/95 text-slate-700 sm:w-auto"
           >
             Узнать больше
           </Button>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-[#64748B]">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-500">
           <span>Записи и дополнительные материалы позже появятся на платформах:</span>
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" asChild className="rounded-full px-3">
             <a
               href={settings.youtube_url || "https://youtube.com"}
               target="_blank"
               rel="noreferrer"
-              className="text-[#FF0000]"
+              className="text-[#DC2626]"
             >
               YouTube
             </a>
           </Button>
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" asChild className="rounded-full px-3">
             <a
               href={settings.max_url || "https://max.com"}
               target="_blank"
