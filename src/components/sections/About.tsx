@@ -1,4 +1,5 @@
 import { BookOpen, Heart, Sparkles } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -46,24 +47,24 @@ export function About({
   const items = descriptions === null ? fallbackDescriptions : descriptions;
 
   return (
-    <section id="about" className="bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-5xl px-4 md:px-6">
+    <section id="about" className="section-shell bg-transparent">
+      <div className="site-container max-w-5xl">
         <div className="mx-auto max-w-3xl">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">
-            О мероприятии
-          </h2>
+          <div className="section-intro text-center">
+            <h2 className="section-title">О мероприятии</h2>
+          </div>
 
-          <Accordion type="single" collapsible className="mt-10 space-y-3">
+          <Accordion type="single" collapsible className="mt-10 space-y-4">
             {items.map((item, index) => (
               <AccordionItem
                 key={item.id}
                 value={item.id}
-                className="rounded-xl border border-slate-200 bg-white px-5"
+                className="surface-card rounded-[1.5rem] border border-slate-200/80 bg-white px-6"
               >
-                <AccordionTrigger className="text-left text-base font-medium text-[#1E293B] hover:no-underline">
+                <AccordionTrigger className="text-left text-base font-semibold text-slate-900 hover:no-underline">
                   {item.title?.trim() || `Подробнее ${index + 1}`}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-[#64748B]">
+                <AccordionContent className="text-sm leading-7 text-slate-600">
                   {item.text}
                 </AccordionContent>
               </AccordionItem>
@@ -72,7 +73,7 @@ export function About({
         </div>
 
         {highlights.length > 0 && (
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
             {highlights.map((highlight) => {
               const iconKey =
                 highlight.icon in iconMap ? (highlight.icon as keyof typeof iconMap) : "sparkles";
@@ -82,15 +83,15 @@ export function About({
               return (
                 <div
                   key={highlight.id}
-                  className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="surface-card rounded-[1.75rem] border border-white/80 p-6"
                 >
                   <div
-                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${style.bg}`}
+                    className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${style.bg}`}
                   >
                     <Icon className={`h-6 w-6 ${style.color}`} />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-[#1E293B]">{highlight.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{highlight.text}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-slate-900">{highlight.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{highlight.text}</p>
                 </div>
               );
             })}

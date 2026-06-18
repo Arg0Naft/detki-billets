@@ -11,18 +11,18 @@ function initials(name: string) {
 
 export function Speakers({ speakers }: { speakers: Speaker[] }) {
   return (
-    <section id="speakers" className="bg-[#F8FAFC] py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-[#1E293B] md:text-4xl">Спикеры</h2>
-          <p className="mt-4 text-base text-[#64748B] md:text-lg">Эксперты конференции</p>
+    <section id="speakers" className="section-shell section-alt">
+      <div className="site-container">
+        <div className="section-intro mx-auto max-w-2xl text-center">
+          <h2 className="section-title">Спикеры</h2>
+          <p className="section-copy mt-4 md:text-lg">Эксперты конференции</p>
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {speakers.map((s) => (
             <div
               key={s.id}
-              className="mx-auto flex h-full w-full max-w-md flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition hover:shadow-md"
+              className="surface-card mx-auto flex h-full w-full max-w-md flex-col items-center rounded-[1.75rem] border border-white/80 p-7 text-center"
             >
               {s.photo_url ? (
                 <img
@@ -35,9 +35,9 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
                   {initials(s.name)}
                 </div>
               )}
-              <h3 className="mt-5 text-lg font-semibold text-[#1E293B]">{s.name}</h3>
-              <p className="mt-1 text-sm font-medium text-[#0EA5E9]">{s.title}</p>
-              <p className="mt-3 text-sm leading-relaxed text-[#64748B]">{s.bio}</p>
+              <h3 className="mt-5 text-xl font-semibold text-slate-900">{s.name}</h3>
+              <p className="mt-1 text-sm font-semibold text-[#0284C7]">{s.title}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-600">{s.bio}</p>
             </div>
           ))}
         </div>

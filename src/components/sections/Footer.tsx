@@ -1,4 +1,5 @@
 import { Instagram, Mail, Phone, Send } from "lucide-react";
+
 import type { EventConfig, LegalPage, SiteSettings } from "@/types";
 
 export function Footer({
@@ -12,28 +13,28 @@ export function Footer({
 }) {
   return (
     <footer className="bg-[#0F172A] text-slate-300">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
+      <div className="site-container grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <div className="text-lg font-semibold text-white">
-            {settings.site_name || config.title}
-          </div>
-          <p className="mt-3 text-sm leading-relaxed text-slate-400">
-            {settings.footer_description}
-          </p>
+          <div className="text-lg font-semibold text-white">{settings.site_name || config.title}</div>
+          <p className="mt-3 max-w-md text-sm leading-7 text-slate-400">{settings.footer_description}</p>
         </div>
 
         <div>
-          <div className="text-sm font-semibold uppercase tracking-wider text-white">Контакты</div>
-          <ul className="mt-4 space-y-2 text-sm">
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-[#0EA5E9]" />
-              <a href={`mailto:${settings.contact_email}`} className="hover:text-white">
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white">Контакты</div>
+          <ul className="mt-5 space-y-3 text-sm">
+            <li className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/6">
+                <Mail className="h-4 w-4 text-[#38BDF8]" />
+              </span>
+              <a href={`mailto:${settings.contact_email}`} className="transition hover:text-white">
                 {settings.contact_email}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-[#0EA5E9]" />
-              <a href={`tel:${settings.contact_phone}`} className="hover:text-white">
+            <li className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/6">
+                <Phone className="h-4 w-4 text-[#38BDF8]" />
+              </span>
+              <a href={`tel:${settings.contact_phone}`} className="transition hover:text-white">
                 {settings.contact_phone}
               </a>
             </li>
@@ -42,16 +43,16 @@ export function Footer({
         </div>
 
         <div>
-          <div className="text-sm font-semibold uppercase tracking-wider text-white">
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white">
             Мы в соцсетях
           </div>
-          <div className="mt-4 flex gap-3">
+          <div className="mt-5 flex gap-3">
             <a
               href={settings.instagram_url || "#"}
               aria-label="Instagram"
               target="_blank"
               rel="noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition hover:bg-[#EC4899]/20 hover:text-[#EC4899]"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/6 transition hover:bg-[#EC4899]/20 hover:text-[#F9A8D4]"
             >
               <Instagram className="h-5 w-5" />
             </a>
@@ -60,7 +61,7 @@ export function Footer({
               aria-label="Telegram"
               target="_blank"
               rel="noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition hover:bg-[#0EA5E9]/20 hover:text-[#0EA5E9]"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/6 transition hover:bg-[#0EA5E9]/20 hover:text-[#7DD3FC]"
             >
               <Send className="h-5 w-5" />
             </a>
@@ -69,7 +70,7 @@ export function Footer({
               aria-label="VKontakte"
               target="_blank"
               rel="noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-sm font-bold transition hover:bg-[#0EA5E9]/20 hover:text-[#0EA5E9]"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/6 text-sm font-bold transition hover:bg-[#0EA5E9]/20 hover:text-[#7DD3FC]"
             >
               VK
             </a>
@@ -92,8 +93,8 @@ export function Footer({
           )}
         </div>
       </div>
-      <div className="border-t border-white/5">
-        <div className="mx-auto max-w-6xl px-4 py-5 text-xs text-slate-500 md:px-6">
+      <div className="border-t border-white/8">
+        <div className="site-container py-5 text-xs text-slate-500">
           © {new Date().getFullYear()} {settings.site_name || config.title}. Все права защищены.
         </div>
       </div>
