@@ -68,37 +68,31 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const siteTitle = "Конференция для молодых мам — билеты и программа";
+const siteDescription =
+  "Однодневная конференция для молодых мам: лекции врачей, психологов и педагогов. Купите билет онлайн.";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Конференция для молодых мам — билеты и программа" },
+      { title: siteTitle },
       {
         name: "description",
-        content:
-          "Однодневная конференция для молодых мам: лекции врачей, психологов и педагогов. Купите билет онлайн.",
+        content: siteDescription,
       },
-      { property: "og:title", content: "Конференция для молодых мам — билеты и программа" },
+      { property: "og:title", content: siteTitle },
       {
         property: "og:description",
-        content: "Знания, поддержка и вдохновение для мам — однодневная конференция.",
+        content: siteDescription,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Конференция для молодых мам — билеты и программа" },
-      {
-        name: "description",
-        content: "A single-page Russian-language website for selling event tickets.",
-      },
-      {
-        property: "og:description",
-        content: "A single-page Russian-language website for selling event tickets.",
-      },
+      { name: "twitter:title", content: siteTitle },
       {
         name: "twitter:description",
-        content: "A single-page Russian-language website for selling event tickets.",
+        content: siteDescription,
       },
       {
         property: "og:image",
