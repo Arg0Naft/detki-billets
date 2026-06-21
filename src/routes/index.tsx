@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEventData } from "@/hooks/useEventData";
 import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -8,8 +7,10 @@ import { Program } from "@/components/sections/Program";
 import { Tickets } from "@/components/sections/Tickets";
 import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
+import { getEventData } from "@/lib/event-data";
 
 export const Route = createFileRoute("/")({
+  loader: () => getEventData(),
   component: Index,
 });
 
@@ -24,16 +25,7 @@ function Index() {
     program,
     faq,
     legalPages,
-    loading,
-  } = useEventData();
-
-  if (loading || !settings || !config) {
-    return (
-      <div className="site-shell flex min-h-screen items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#0EA5E9]/20 border-t-[#0EA5E9]" />
-      </div>
-    );
-  }
+  } = Route.useLoaderData();
 
   return (
     <div className="site-shell min-h-screen text-[#1E293B]">
