@@ -34,27 +34,18 @@ export type EventData = {
 };
 
 export async function getEventData(): Promise<EventData> {
-  const [
-    settings,
-    config,
-    descriptions,
-    highlights,
-    tickets,
-    speakers,
-    program,
-    faq,
-    legalPages,
-  ] = await Promise.all([
-    getSiteSettings(),
-    getEventConfig(),
-    getEventDescriptions(),
-    getEventHighlights(),
-    getTickets(),
-    getSpeakers(),
-    getProgram(),
-    getFaq(),
-    getLegalPages(),
-  ]);
+  const [settings, config, descriptions, highlights, tickets, speakers, program, faq, legalPages] =
+    await Promise.all([
+      getSiteSettings(),
+      getEventConfig(),
+      getEventDescriptions(),
+      getEventHighlights(),
+      getTickets(),
+      getSpeakers(),
+      getProgram(),
+      getFaq(),
+      getLegalPages(),
+    ]);
 
   return {
     settings,
