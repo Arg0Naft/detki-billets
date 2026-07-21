@@ -16,13 +16,13 @@ export function Hero({ config }: { config: EventConfig }) {
       <div className="pointer-events-none absolute -bottom-20 right-1/4 h-48 w-48 rounded-full bg-[#FDE68A]/12 blur-3xl" />
 
       <div className="site-container relative">
-        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_22rem] lg:gap-10">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(19rem,23rem)] lg:gap-12">
           <div className="max-w-3xl text-center lg:text-left">
             <span className="section-kicker px-4 text-[0.62rem] tracking-[0.16em] lg:justify-start lg:text-left">
               {config.hero_badge?.trim() || "Практическая конференция для родителей"}
             </span>
 
-            <h1 className="mx-auto mt-6 max-w-[10ch] text-[clamp(2.15rem,10vw,5.6rem)] font-extrabold leading-[0.92] tracking-[-0.06em] text-slate-950 lg:mx-0 lg:max-w-[8ch]">
+            <h1 className="mx-auto mt-6 max-w-[11ch] text-[clamp(2.35rem,8vw,5.15rem)] font-extrabold leading-[0.94] tracking-[-0.06em] text-slate-950 lg:mx-0 lg:max-w-[9.5ch]">
               {config.title}
             </h1>
 
@@ -67,7 +67,7 @@ export function Hero({ config }: { config: EventConfig }) {
             </div>
           </div>
 
-          <aside className="surface-card-strong relative overflow-hidden rounded-[2rem] p-6 text-left shadow-[0_28px_70px_-46px_rgba(14,165,233,0.45)] md:p-7">
+          <aside className="surface-card-strong relative overflow-hidden rounded-[2rem] p-6 text-left shadow-[0_28px_70px_-46px_rgba(14,165,233,0.45)] md:p-7 lg:translate-y-2">
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#0EA5E9] via-[#7DD3FC] to-[#EC4899]" />
 
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">

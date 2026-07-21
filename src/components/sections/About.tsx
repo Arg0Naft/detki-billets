@@ -1,5 +1,9 @@
 import { BookOpen, Heart, Sparkles } from "lucide-react";
 
+import expertiseIllustration from "@/assets/highlights/expertise.png";
+import connectionIllustration from "@/assets/highlights/connection.png";
+import toolsIllustration from "@/assets/highlights/tools.png";
+
 import {
   Accordion,
   AccordionContent,
@@ -18,6 +22,12 @@ const iconStyles = {
   book: { color: "text-[#0EA5E9]", bg: "bg-[#E0F2FE]" },
   heart: { color: "text-[#EC4899]", bg: "bg-[#FCE7F3]" },
   sparkles: { color: "text-[#0EA5E9]", bg: "bg-[#E2F2FE]" },
+};
+
+const illustrationMap = {
+  book: expertiseIllustration,
+  heart: connectionIllustration,
+  sparkles: toolsIllustration,
 };
 
 export function About({
@@ -49,7 +59,7 @@ export function About({
   return (
     <section id="about" className="section-shell bg-transparent">
       <div className="site-container max-w-6xl">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start lg:gap-12">
           <div className="mx-auto w-full max-w-3xl lg:mx-0 lg:max-w-none">
            <div className="section-intro text-center lg:max-w-2xl lg:text-left">
   <span className="section-kicker">
@@ -91,6 +101,7 @@ export function About({
                   highlight.icon in iconMap ? (highlight.icon as keyof typeof iconMap) : "sparkles";
                 const Icon = iconMap[iconKey];
                 const style = iconStyles[iconKey];
+                const illustration = illustrationMap[iconKey];
                 const cardClass =
                   index === 1
                     ? "surface-card-warm"
@@ -100,11 +111,20 @@ export function About({
 
                 return (
                   <div key={highlight.id} className={`${cardClass} rounded-[1.8rem] p-6`}>
-                    <div
-                      className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${style.bg}`}
-                    >
-                      <Icon className={`h-6 w-6 ${style.color}`} />
-                    </div>
+                    {illustration ? (
+                      <img
+                        src={illustration}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-20 w-20 object-contain"
+                      />
+                    ) : (
+                      <div
+                        className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${style.bg}`}
+                      >
+                        <Icon className={`h-6 w-6 ${style.color}`} />
+                      </div>
+                    )}
                     <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-slate-950">
                       {highlight.title}
                     </h3>
