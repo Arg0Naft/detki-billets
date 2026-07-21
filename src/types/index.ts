@@ -26,6 +26,9 @@ export interface EventConfig {
   hero_badge?: string;
   date_description?: string;
   time_description?: string;
+  about_badge?: string;
+  about_title?: string;
+  about_description?: string;
   sales_enabled: boolean;
 }
 
