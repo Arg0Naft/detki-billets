@@ -30,6 +30,10 @@ export interface EventConfig {
   about_title?: string;
   about_description?: string;
   sales_enabled: boolean;
+  faq_badge?: string;
+  faq_title?: string;
+  faq_description?: string;
+  faq_intro_visible?: boolean;
 }
 
 export interface EventDescription {
