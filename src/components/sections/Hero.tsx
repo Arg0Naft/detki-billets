@@ -25,6 +25,7 @@ export function Hero({ config }: { config: EventConfig }) {
             <h1 className="mx-auto mt-6 max-w-[10ch] text-[clamp(2.15rem,10vw,5.6rem)] font-extrabold leading-[0.92] tracking-[-0.06em] text-slate-950 lg:mx-0 lg:max-w-[8ch]">
               {config.title}
             </h1>
+
             <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,2.4vw,1.2rem)] leading-8 text-slate-600 lg:mx-0">
               {config.subtitle}
             </p>
@@ -34,10 +35,12 @@ export function Hero({ config }: { config: EventConfig }) {
                 <Calendar className="h-4 w-4 text-[#0EA5E9]" />
                 <span>{config.date}</span>
               </div>
+
               <div className="soft-pill inline-flex items-center gap-2">
                 <Clock className="h-4 w-4 text-[#0EA5E9]" />
                 <span>{config.time}</span>
               </div>
+
               <div className="soft-pill inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-[#EC4899]" />
                 <span>{config.location}</span>
@@ -52,6 +55,7 @@ export function Hero({ config }: { config: EventConfig }) {
               >
                 Купить билет
               </Button>
+
               <Button
                 size="lg"
                 variant="outline"
@@ -65,6 +69,7 @@ export function Hero({ config }: { config: EventConfig }) {
 
           <aside className="surface-card-strong relative overflow-hidden rounded-[2rem] p-6 text-left shadow-[0_28px_70px_-46px_rgba(14,165,233,0.45)] md:p-7">
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#0EA5E9] via-[#7DD3FC] to-[#EC4899]" />
+
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
               Ближайшее событие
             </p>
@@ -75,8 +80,10 @@ export function Hero({ config }: { config: EventConfig }) {
                   <Calendar className="h-4 w-4 text-[#0EA5E9]" />
                   {config.date}
                 </div>
+
                 <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Очная программа с практическими выступлениями и живыми вопросами.
+                  {config.date_description?.trim() ||
+                    "Очная программа с практическими выступлениями и живыми вопросами."}
                 </p>
               </div>
 
@@ -85,8 +92,10 @@ export function Hero({ config }: { config: EventConfig }) {
                   <Clock className="h-4 w-4 text-[#0EA5E9]" />
                   {config.time}
                 </div>
+
                 <p className="mt-2 text-sm leading-6 text-slate-600">
-                  Плотная, но комфортная программа без перегруза и с понятной структурой.
+                  {config.time_description?.trim() ||
+                    "Плотная, но комфортная программа без перегруза и с понятной структурой."}
                 </p>
               </div>
 
@@ -95,7 +104,10 @@ export function Hero({ config }: { config: EventConfig }) {
                   <MapPin className="h-4 w-4 text-[#EC4899]" />
                   {config.location}
                 </div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{config.location_address}</p>
+
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  {config.location_address}
+                </p>
               </div>
             </div>
           </aside>
