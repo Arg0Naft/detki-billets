@@ -34,69 +34,37 @@ export function Speakers({ speakers }: { speakers: Speaker[] }) {
           <p className="section-copy mt-4 md:text-lg">Эксперты конференции</p>
         </div>
 
-        <div
-          className={`mt-14 ${
-            hasSingleSpeaker ? "mx-auto max-w-5xl" : "grid gap-6 md:grid-cols-2"
-          }`}
-        >
+        <div className="mx-auto mt-14 max-w-5xl space-y-6">
           {speakers.map((s) => (
             <div
               key={s.id}
-              className={`surface-card relative overflow-hidden rounded-[2rem] ${
-                hasSingleSpeaker ? "p-7 md:p-10" : "p-7 md:p-8"
-              }`}
+              className="surface-card relative overflow-hidden rounded-[2rem] p-7 md:p-10"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#0EA5E9] via-[#7DD3FC] to-[#EC4899]" />
-              <div
-                className={`flex h-full flex-col gap-6 ${
-                  hasSingleSpeaker
-                    ? "lg:flex-row lg:items-center lg:gap-10"
-                    : "md:flex-row md:items-start"
-                }`}
-              >
+              <div className="flex h-full flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
                 {getSpeakerImage(s) ? (
                   <img
                     src={getSpeakerImage(s) ?? undefined}
                     alt={s.name}
-                    className={`object-cover ring-4 ring-[#E0F2FE] ${
-                      hasSingleSpeaker
-                        ? "mx-auto h-72 w-full max-w-[21rem] rounded-[2rem] object-top shadow-[0_30px_70px_-40px_rgba(14,165,233,0.45)] md:h-[28rem] lg:mx-0"
-                        : "h-28 w-28 rounded-[1.75rem]"
-                    }`}
+                    className="mx-auto h-72 w-full max-w-[21rem] rounded-[2rem] object-cover object-top shadow-[0_30px_70px_-40px_rgba(14,165,233,0.45)] ring-4 ring-[#E0F2FE] md:h-[28rem] lg:mx-0"
                   />
                 ) : (
-                  <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-[1.75rem] bg-gradient-to-br from-[#60A5FA] via-[#A78BFA] to-[#EC4899] text-2xl font-semibold text-white shadow-[0_24px_50px_-32px_rgba(236,72,153,0.5)] ring-4 ring-white">
+                  <div className="mx-auto flex h-72 w-full max-w-[21rem] shrink-0 items-center justify-center rounded-[2rem] bg-gradient-to-br from-[#60A5FA] via-[#A78BFA] to-[#EC4899] text-5xl font-semibold text-white shadow-[0_30px_70px_-40px_rgba(236,72,153,0.5)] ring-4 ring-white md:h-[28rem] lg:mx-0">
                     {initials(s.name)}
                   </div>
                 )}
 
-                <div
-                  className={`flex-1 ${hasSingleSpeaker ? "text-center lg:text-left" : "text-center md:text-left"}`}
-                >
+                <div className="flex-1 text-center lg:text-left">
                   <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-slate-400">
                     {hasSingleSpeaker ? "Главный спикер конференции" : "Эксперт конференции"}
                   </p>
-                  <h3
-                    className={`mt-3 font-semibold tracking-[-0.03em] text-slate-950 ${
-                      hasSingleSpeaker ? "text-3xl md:text-4xl" : "text-2xl"
-                    }`}
-                  >
+                  <h3 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-slate-950 md:text-4xl">
                     {s.name}
                   </h3>
-                  <p
-                    className={`mt-2 font-semibold text-[#0284C7] ${
-                      hasSingleSpeaker ? "text-base md:text-lg" : "text-sm"
-                    }`}
-                  >
+                  <p className="mt-2 text-base font-semibold text-[#0284C7] md:text-lg">
                     {s.title}
                   </p>
-                  <p
-                    className={`mt-4 text-slate-600 ${
-                      hasSingleSpeaker
-                        ? "mx-auto max-w-2xl text-base leading-8 lg:mx-0"
-                        : "text-sm leading-7"
-                    }`}
-                  >
+                  <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-600 lg:mx-0">
                     {s.bio}
                   </p>
                 </div>

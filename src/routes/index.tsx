@@ -8,6 +8,7 @@ import { Tickets } from "@/components/sections/Tickets";
 import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
 import { getEventData } from "@/lib/event-data";
+import { LoveNote } from "@/components/sections/LoveNote";
 
 export const Route = createFileRoute("/")({
   loader: () => getEventData(),
@@ -37,6 +38,7 @@ function Index() {
         <Program items={program} />
         <Tickets tickets={tickets} salesEnabled={config.sales_enabled} />
         <Faq items={faq} config={config} />
+        <LoveNote />
       </main>
       <Footer config={config} settings={settings} legalPages={legalPages} />
     </div>

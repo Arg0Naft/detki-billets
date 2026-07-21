@@ -36,17 +36,17 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
               key={ticket.id}
               className={`relative flex w-full flex-col rounded-[2rem] p-8 ${
                 ticket.is_popular ? "surface-card-warm" : "surface-card-strong"
-              }`}
+              } ${hasSingleTicket ? "items-center px-7 py-10 text-center md:px-12" : ""}`}
             >
               {(ticket.is_popular || hasSingleTicket) && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#EC4899] px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-sm">
-                  {hasSingleTicket ? "Основной билет" : "Рекомендованный тариф"}
+                  {hasSingleTicket ? "Единственный билет" : "Рекомендованный тариф"}
                 </span>
               )}
 
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-slate-400">
                 {hasSingleTicket
-                  ? "Основной формат участия"
+                  ? "Единственный формат участия"
                   : ticket.is_popular
                     ? "Лучший баланс цены и пользы"
                     : "Базовый формат участия"}
@@ -69,7 +69,11 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
                 )}
               </div>
 
-              <ul className="mt-7 flex-1 space-y-3.5">
+              <ul
+                className={`mt-7 flex-1 space-y-3.5 ${
+                  hasSingleTicket ? "w-full max-w-md text-left" : ""
+                }`}
+              >
                 {ticket.features.map((feature, index) => (
                   <li
                     key={index}
@@ -86,7 +90,9 @@ export function Tickets({ tickets, salesEnabled }: { tickets: Ticket[]; salesEna
               <Button
                 disabled={!salesEnabled || !ticket.payment_url}
                 asChild={Boolean(salesEnabled && ticket.payment_url)}
-                className="mt-8 w-full rounded-2xl bg-[#0EA5E9] text-white"
+                className={`mt-8 w-full rounded-2xl bg-[#0EA5E9] text-white ${
+                  hasSingleTicket ? "max-w-md" : ""
+                }`}
               >
                 {salesEnabled && ticket.payment_url ? (
                   <a href={ticket.payment_url}>Купить билет</a>
