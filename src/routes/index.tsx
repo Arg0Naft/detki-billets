@@ -36,7 +36,7 @@ function Index() {
         <About config={config} descriptions={descriptions} highlights={highlights} />
         <Program items={program} />
         <Tickets tickets={tickets} salesEnabled={config.sales_enabled} />
-        <Faq items={faq} />
+        <Faq items={faq} config={config} />
       </main>
       <Footer config={config} settings={settings} legalPages={legalPages} />
     </div>
