@@ -155,6 +155,10 @@ export function Footer({
                 </div>
               ))}
             </dl>
+            <p className="mt-4 ml-auto max-w-xl text-xs leading-5 text-slate-500 md:text-right">
+              Instagram принадлежит компании Meta Platforms Inc., признанной экстремистской организацией,
+              деятельность которой запрещена на территории Российской Федерации.
+            </p>
           </div>
         </div>
       )}
