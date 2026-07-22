@@ -12,6 +12,14 @@ export function Footer({
   settings: SiteSettings;
   legalPages: LegalPage[];
 }) {
+  const legalDetails = [
+    ["Наименование", settings.legal_name],
+    ["Владелец", settings.legal_owner],
+    ["ИНН", settings.legal_inn],
+    ["ОГРН", settings.legal_ogrn],
+    ["Юридический адрес", settings.legal_address],
+  ].filter(([, value]) => Boolean(value));
+
   return (
     <footer className="relative overflow-hidden bg-[#0F172A] text-slate-300">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7DD3FC]/80 to-transparent" />
@@ -133,6 +141,23 @@ export function Footer({
           )}
         </div>
       </div>
+      {legalDetails.length > 0 && (
+        <div className="border-t border-white/8">
+          <div className="site-container py-5">
+            <div className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-sky-200/70">
+              Реквизиты
+            </div>
+            <dl className="mt-3 grid gap-x-8 gap-y-2 text-xs leading-5 sm:grid-cols-2 lg:grid-cols-3">
+              {legalDetails.map(([label, value]) => (
+                <div key={label} className="flex gap-2">
+                  <dt className="shrink-0 text-slate-500">{label}:</dt>
+                  <dd className="text-slate-300">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      )}
       <div className="border-t border-white/8">
         <div className="site-container py-5 text-xs text-slate-500">
           © {new Date().getFullYear()} {settings.site_name || config.title}. Все права защищены.

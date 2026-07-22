@@ -11,6 +11,11 @@ export interface SiteSettings {
   vk_url: string;
   youtube_url: string;
   max_url: string;
+  legal_name?: string;
+  legal_owner?: string;
+  legal_inn?: string;
+  legal_ogrn?: string;
+  legal_address?: string;
 }
 
 export interface EventConfig {

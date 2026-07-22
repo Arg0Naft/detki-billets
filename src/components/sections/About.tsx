@@ -61,20 +61,16 @@ export function About({
       <div className="site-container max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start lg:gap-12">
           <div className="mx-auto w-full max-w-3xl lg:mx-0 lg:max-w-none">
-           <div className="section-intro text-center lg:max-w-2xl lg:text-left">
-  <span className="section-kicker">
-    {config.about_badge?.trim() || "Что вас ждёт"}
-  </span>
+            <div className="section-intro text-center lg:max-w-2xl lg:text-left">
+              <span className="section-kicker">{config.about_badge?.trim() || "Что вас ждёт"}</span>
 
-  <h2 className="section-title">
-    {config.about_title?.trim() || "О мероприятии"}
-  </h2>
+              <h2 className="section-title">{config.about_title?.trim() || "О мероприятии"}</h2>
 
-  <p className="section-copy">
-    {config.about_description?.trim() ||
-      "Спокойная, содержательная программа для родителей, которым важны ясные ответы, практические инструменты и поддержка экспертов."}
-  </p>
-</div>
+              <p className="section-copy">
+                {config.about_description?.trim() ||
+                  "Спокойная, содержательная программа для родителей, которым важны ясные ответы, практические инструменты и поддержка экспертов."}
+              </p>
+            </div>
 
             <Accordion type="single" collapsible className="mt-10 space-y-4">
               {items.map((item, index) => (
