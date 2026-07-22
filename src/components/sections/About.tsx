@@ -61,7 +61,7 @@ export function About({
       <div className="site-container max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start lg:gap-12">
           <div className="mx-auto w-full max-w-3xl lg:mx-0 lg:max-w-none">
-            <div className="section-intro text-center lg:max-w-2xl lg:text-left">
+            <div className="section-intro text-center lg:max-w-[38rem] lg:text-left">
               <span className="section-kicker">{config.about_badge?.trim() || "Что вас ждёт"}</span>
 
               <h2 className="section-title">{config.about_title?.trim() || "О мероприятии"}</h2>
