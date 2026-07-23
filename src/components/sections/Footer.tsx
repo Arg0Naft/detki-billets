@@ -36,6 +36,21 @@ export function Footer({
           <p className="mt-4 max-w-md text-sm leading-7 text-slate-400">
             {settings.footer_description}
           </p>
+          {legalPages.length > 0 && (
+            <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-400">
+              {legalPages.map((page) => (
+                <a
+                  key={page.id}
+                  href={page.url || "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-white"
+                >
+                  {page.title}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
         <div>
@@ -123,29 +138,19 @@ export function Footer({
               </a>
             </Button>
           </div>
-
-          {legalPages.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-400">
-              {legalPages.map((page) => (
-                <a
-                  key={page.id}
-                  href={page.url || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition hover:text-white"
-                >
-                  {page.title}
-                </a>
-              ))}
-            </div>
-          )}
         </div>
       </div>
       {legalDetails.length > 0 && (
         <div className="border-t border-white/8">
           <div className="site-container py-5">
-            <div className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-sky-200/70">
-              Реквизиты
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
+              <div className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-sky-200/70">
+                Реквизиты
+              </div>
+              <p className="max-w-xl text-xs leading-5 text-slate-500 md:text-right">
+                Instagram принадлежит компании Meta Platforms Inc., признанной экстремистской организацией,
+                деятельность которой запрещена на территории Российской Федерации.
+              </p>
             </div>
             <dl className="mt-3 grid gap-x-8 gap-y-2 text-xs leading-5 sm:grid-cols-2 lg:grid-cols-3">
               {legalDetails.map(([label, value]) => (

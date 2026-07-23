@@ -22,11 +22,11 @@ export function Hero({ config }: { config: EventConfig }) {
               {config.hero_badge?.trim() || "Практическая конференция для родителей"}
             </span>
 
-            <h1 className="mx-auto mt-6 max-w-[11ch] text-[clamp(2.35rem,8vw,5.15rem)] font-extrabold leading-[0.94] tracking-[-0.06em] text-slate-950 lg:mx-0 lg:max-w-[9.5ch]">
+            <h1 className="mx-auto mt-6 max-w-[11ch] text-[clamp(2.35rem,7vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.06em] text-slate-950 lg:mx-0 lg:max-w-[13.5ch]">
               {config.title}
             </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,2.4vw,1.2rem)] leading-8 text-slate-600 lg:mx-0">
+            <p className="mx-auto mt-5 max-w-[38rem] text-[clamp(1rem,2.4vw,1.2rem)] leading-8 text-slate-600 lg:mx-0">
               {config.subtitle}
             </p>
 
